@@ -7,3 +7,54 @@ export const CardData = [
     { id: 6, name: "Siyara", image: "/images/cardswiper6.png", subTitle: "Personality", video: "/video/fishvideo.mp4" },
     { id: 7, name: "Naraida", image: "/images/cardswiper7.png", subTitle: "Personality", video: "/video/hero-video.mp4" },
 ];
+
+export const WelcomeData = [
+    {
+        id: 1,
+        welcomeText: "👋 Welcome to D8TeMe!",
+        welcomeTitle: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis donec viverra arcu ullamcorper. Tempus viverra nunc ac sit nunc volutpat. Mi faucibus quam iaculis facilisis.",
+        welcomeImage: "/svg/welcomephoto.svg",
+        welcomeDesc: "Lorem ipsum dolor sit ",
+        welcomeFullDesc: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis."
+    },
+    {
+        id: 2,
+        welcomeText: "👋 Welcome to D8TeMe!",
+        welcomeTitle: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis donec viverra arcu ullamcorper. Tempus viverra nunc ac sit nunc volutpat. Mi faucibus quam iaculis facilisis.",
+        welcomeImage: "/svg/welcomephoto.svg",
+        welcomeDesc: "Lorem ipsum dolor sit ",
+        welcomeFullDesc: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis."
+    },
+    {
+        id: 3,
+        welcomeText: "👋 Welcome to D8TeMe!",
+        welcomeTitle: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis donec viverra arcu ullamcorper. Tempus viverra nunc ac sit nunc volutpat. Mi faucibus quam iaculis facilisis.",
+        welcomeImage: "/svg/welcomephoto.svg",
+        welcomeDesc: "Lorem ipsum dolor sit ",
+        welcomeFullDesc: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis."
+    },
+    {
+        id: 4,
+        welcomeText: "👋 Welcome to D8TeMe!",
+        welcomeTitle: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis donec viverra arcu ullamcorper. Tempus viverra nunc ac sit nunc volutpat. Mi faucibus quam iaculis facilisis.",
+        welcomeImage: "/svg/welcomephoto.svg",
+        welcomeDesc: "Lorem ipsum dolor sit ",
+        welcomeFullDesc: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis."
+    },
+    {
+        id: 5,
+        welcomeText: "👋 Welcome to D8TeMe!",
+        welcomeTitle: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis donec viverra arcu ullamcorper. Tempus viverra nunc ac sit nunc volutpat. Mi faucibus quam iaculis facilisis.",
+        welcomeImage: "/svg/welcomephoto.svg",
+        welcomeDesc: "Lorem ipsum dolor sit ",
+        welcomeFullDesc: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis."
+    },
+    {
+        id: 6,
+        welcomeText: "👋 Welcome to D8TeMe!",
+        welcomeTitle: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis donec viverra arcu ullamcorper. Tempus viverra nunc ac sit nunc volutpat. Mi faucibus quam iaculis facilisis.",
+        welcomeImage: "/svg/welcomephoto.svg",
+        welcomeDesc: "Lorem ipsum dolor sit ",
+        welcomeFullDesc: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis."
+    },
+]

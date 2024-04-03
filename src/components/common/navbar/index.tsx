@@ -1,9 +1,26 @@
 "use client"
+import Email from "@/components/modals/Email";
+import EmailVerificationCode from "@/components/modals/EmailVerificationCode";
+import LoginWithPhoneNumber from "@/components/modals/LoginWithPhoneNumber";
+import PhoneVerificationCode from "@/components/modals/PhoneVerificationCode";
+import PricePlan from "@/components/modals/PricePlan";
+import SignIn from "@/components/modals/SignIn";
+import VerifyEmail from "@/components/modals/VerifyEmail";
+import Welcome from "@/components/modals/Welcome";
 import useWindowSize from "@/hooks/useWindowSize";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [isSignIn, setIsSignIn] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
+  const [isVerifyEmail, setIsVerifyEmail] = useState(false);
+  const [isEmailVerification, setIsEmailVerification] = useState(false)
+  const [isPhoneNumber, setIsPhoneNumber] = useState(false)
+  const [isPhoneNumberCode, setIsPhoneNumberCode] = useState(false)
+  const [isPricePlan, setIsPricePlan] = useState(false)
+  const [isWelcome, setIsWelcome] = useState(false)
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { width } = useWindowSize();
   useEffect(() => {
@@ -128,6 +145,8 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+          <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Sign In</button>
+
           <div className="flex justify-end items-center gap-5">
             <div className="h-5 w-5 cursor-pointer">
               <Image
@@ -257,6 +276,16 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+
+      <SignIn forModal={isSignIn} setForModal={setIsSignIn} setIsEmail={setIsEmail} setIsPhoneNumber={setIsPhoneNumber} />
+      <Email forModal={isEmail} setForModal={setIsEmail} setIsVerifyEmail={setIsVerifyEmail} />
+      <VerifyEmail forModal={isVerifyEmail} setForModal={setIsVerifyEmail} setIsEmail={setIsEmail} setIsEmailVerification={setIsEmailVerification} />
+      <EmailVerificationCode forModal={isEmailVerification} setForModal={setIsEmailVerification} setIsPricePlan={setIsPricePlan} />
+      <LoginWithPhoneNumber forModal={isPhoneNumber} setForModal={setIsPhoneNumber} setIsPhoneNumberCode={setIsPhoneNumberCode} />
+      <PhoneVerificationCode forModal={isPhoneNumberCode} setForModal={setIsPhoneNumberCode} setIsPricePlan={setIsPricePlan} />
+      <PricePlan forModal={isPricePlan} setForModal={setIsPricePlan} setIsWelcome={setIsWelcome} />
+      <Welcome forModal={isWelcome} setForModal={setIsWelcome} />
     </>
   );
 };
