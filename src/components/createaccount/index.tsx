@@ -1,13 +1,14 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import StepOne from '../strp1';
+import StepOne from './strp1';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Image from 'next/image.js';
 import { CreateAccountType } from '@/types/createaccounttype/createaccounttype';
-import StepTwo from '../step2';
-import StepFour from '../step4';
+import StepTwo from './step2';
+import StepFour from './step4';
+import StepThree from './step3';
 
 const SignupSchema = Yup.object().shape({
     firstname: Yup.string().required('Required'),
@@ -92,6 +93,11 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                                 {
                                     currentStep === 1 && (
                                         <StepTwo />
+                                    )
+                                }
+                                {
+                                    currentStep === 2 && (
+                                        <StepThree />
                                     )
                                 }
                                 {

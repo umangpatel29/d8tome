@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import HomePage from '@/components/home'
-import CreateAccountSteps from '@/components/createaccount/steps'
+import CreateAccountSteps from '@/components/createaccount'
 import Footer from '@/components/common/footer'
 
 const Home = () => {
