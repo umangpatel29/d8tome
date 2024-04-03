@@ -20,7 +20,7 @@ const Navbar = () => {
   }, [width]);
   return (
     <>
-      <div className="sticky top-0 bg-white py-5 z-[999]">
+      <div className="sticky top-0 border-b-2 bg-white py-5 z-[999]">
         <div className="container mx-auto px-5 md:px-0 flex items-center justify-between w-full">
           <div className="flex items-center justify-start gap-3 md:gap-10">
             <button

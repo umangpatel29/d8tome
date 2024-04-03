@@ -18,7 +18,7 @@ const StartYourDate = () => {
               Malesuada ut aliquam at ac est nisi, interdum etiam dignissim.
               Risus elit et fringilla habitant ut facilisi.
             </div>
-            <button className='text-pinkmain font-medium mt-8 leading-[24px] text-4 px-7 py-3 bg-white rounded-sm'>Upgrade Now</button>
+            <button className='text-primary font-medium mt-8 leading-[24px] text-4 px-7 py-3 bg-white rounded-sm'>Upgrade Now</button>
           </div>
         </div>
       </div>

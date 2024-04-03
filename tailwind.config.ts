@@ -22,7 +22,8 @@ const config: Config = {
       colors: {
         "netural-black": "rgba(68, 71, 80, 1)",
         "dark-pink": "rgba(255, 0, 128, 1)",
-        "pinkmain": '#FF0080'
+        "pinkmain": '#FF0080',
+        "primary": '#FF0080'
       },
     },
   },
