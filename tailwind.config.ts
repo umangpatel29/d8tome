@@ -21,6 +21,9 @@ const config: Config = {
         "pinkmain": '#FF0080',
         "primary": '#FF0080'
       },
+      boxShadow: {
+        grayshadow: "0px 1.25px 5px 0px rgba(0, 0, 0, 0.19)",
+      },
     },
   },
   plugins: [],
