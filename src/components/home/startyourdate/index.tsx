@@ -29,7 +29,7 @@ const StartYourDate = () => {
         <Image src='/svg/rosegirl.svg' alt='' width={700} height={700} />
       </div>
       <div className='absolute top-0 right-0 h-full hidden md:flex overflow-hidden'>
-        <Image src='/svg/iphones.svg' alt='' width={700} height={700} />
+        <Image src='/svg/startdateiphones.svg' alt='' width={700} height={700} />
       </div>
     </div>
   )
