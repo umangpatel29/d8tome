@@ -46,7 +46,7 @@ const Hero = () => {
 
   return (
     <div className="bg-gradient-to-r from-red-500 to-blue-500 w-full lg:h-[682px] min-h-[682px]">
-      <div className="container mx-auto px-5 md:px-0 grid lg:grid-cols-4 lg:grid-rows-1 grid-cols-1 grid-rows-3  gap-8 justify-center items-center h-full w-full">
+      <div className="container mx-auto px-3 md:px-0 grid lg:grid-cols-4 lg:grid-rows-1 grid-cols-1 grid-rows-3  gap-8 justify-center items-center h-full w-full">
         {/* left side  */}
 
         <OuterCardSwiper setVideoCardData={setVideoCardData} leftCardData={CardData} />
@@ -54,7 +54,7 @@ const Hero = () => {
         {/* center side  */}
         <div className="flex flex-col justify-center lg:col-span-2 lg:col-start-2 gap-10">
           <HeroVideo videoCardData={videoCardData} />
-          <div className="w-full flex items-center justify-center gap-3">
+          <div className="w-full flex items-center justify-center md:gap-3 gap-2">
             <div
               className={`w-[70px] h-[170px] flex justify-center items-center rounded-l  ${isBeginning ? " bg-[#F4F3F350]" : "bg-[#F4F3F3]"
                 }`}

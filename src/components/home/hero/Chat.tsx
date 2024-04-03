@@ -56,8 +56,8 @@ const Chat = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-center bottom-0 items-center gap-2">
-        <div className="h-[36px] w-[36px]  relative border border-[#8b8b8b] rounded-full">
+      <div className="flex justify-center bottom-0 items-center gap-1">
+        <div className="h-[40px] w-[40px]  relative border border-[#8b8b8b] rounded-full">
           <Image
             src="/images/profile-picture.png"
             alt="not found"

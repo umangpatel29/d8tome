@@ -1,12 +1,11 @@
-import Explore from '@/components/home/explore'
-import Hero from '@/components/home/hero'
 import React from 'react'
+import HomePage from '@/components/home'
 
 const Home = () => {
   return (
     <>
-      <Hero />
-      <Explore />
+
+      <HomePage />
     </>
   )
 }

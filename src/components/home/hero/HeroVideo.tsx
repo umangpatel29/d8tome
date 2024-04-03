@@ -13,7 +13,7 @@ interface OuterCardSwiperProps {
 const HeroVideo = ({ videoCardData }: OuterCardSwiperProps) => {
   console.log("🚀 ~ HeroVideo ~ videoCardData:", videoCardData)
   const [isMuted, setIsMuted] = useState<boolean>(false);
-  const [isPlay, setIsPlay] = useState<boolean>(false);
+  const [isPlay, setIsPlay] = useState<boolean>(true);
   return (
     <div className="relative rounded-[12px]">
       <div className="relative h-[326px] w-full">

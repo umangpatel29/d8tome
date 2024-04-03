@@ -1,6 +1,12 @@
 "use client"
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export const ExploreData = [
     {
@@ -46,30 +52,95 @@ const ExploreHeader = () => {
         setActiveIndex(index)
     }
 
+
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [isEnd, setIsEnd] = useState(false);
+    console.log("🚀 ~ ExploreHeader ~ isBeginning:", isBeginning, isEnd)
+
+    const handleInit = (swiper: {
+        isBeginning: boolean | ((prevState: boolean) => boolean);
+        isEnd: boolean | ((prevState: boolean) => boolean);
+    }) => {
+        setIsBeginning(swiper.isBeginning);
+        setIsEnd(swiper.isEnd);
+    };
+
+    const handleSlideChange = (swiper: {
+        isBeginning: boolean | ((prevState: boolean) => boolean);
+        isEnd: boolean | ((prevState: boolean) => boolean);
+    }) => {
+        setIsBeginning(swiper.isBeginning);
+        setIsEnd(swiper.isEnd);
+    };
+
     return (
         <>
-            {/* <Image src="/svg/border.svg" width={10} height={10} alt="Previous" /> */}
-            <div className='mt-[96px] flex flex-col items-center gap-[56px]'>
-                <span className='font-bold  text-[36px] leading-[53px]'>Explore By Tags</span>
-                <div className='flex gap-[25px] items-center'>
-                    {
-                        ExploreData.map((data, index) => {
-                            return (
-                                <div key={index} onClick={() => { handleClick(index as any) }} className={`${activeIndex === index ? "bg-[#FF0080]" : "bg-white border border-[#ff0080]"}  duration-[600ms] cursor-pointer rounded-[45px] px-[40px] py-[16px] flex items-center gap-[10px]`}>
-                                    <div><Image src={activeIndex === index ? data.iconwhite : data.iconpink} width={24} height={24} alt={data.alt} className='text-white' /></div>
-                                    <span className={`${activeIndex === index ? "text-white" : "text-[#FF0080]"} font-semibold text-[16px] leading-[19px]`}>{data.title}</span>
+            <div className=''>
+                <div className='flex justify-center items-center'>
+                    <span className='font-bold text-[36px] leading-[53px]'>Explore By Tags</span>
+                </div>
+                <div className='flex gap-2 items-center md:gap-4 md:mt-20 mt-5'>
+                    <div className='prevheader cursor-pointer h-[35px] w-[35px] md:h-[55px] md:w-[55px] overflow-hidden'>
+                        <Image src="/svg/explorenexticon.svg" className='transform rotate-180 h-full w-full' width={30} height={30} alt="left arrow" />
+                    </div>
+                    <Swiper
+                        slidesPerView={1}
+                        spaceBetween={20}
+                        className="w-[73%] mt-2 md:mt-0 md:w-full"
+                        modules={[Navigation]}
+                        navigation={{
+                            prevEl: ".prevheader",
+                            nextEl: ".nextheader",
+                        }}
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 2.5,
+                                spaceBetween: 20
+                            },
+                            768: {
+                                slidesPerView: 3.5,
+                                spaceBetween: 25
+                            },
+                            1024: {
+                                slidesPerView: 4.5,
+                                spaceBetween: 30
+                            },
+                        }}
+                        onInit={handleInit}
+                        onSlideChange={handleSlideChange}
+                    >
+                        {ExploreData.map((data, index) => (
+                            <SwiperSlide key={data.id}>
+                                <div
+                                    onClick={() => handleClick(index)}
+                                    className={`${activeIndex === index ? 'bg-[#FF0080]' : 'bg-white border border-[#ff0080]'
+                                        } duration-[600ms] cursor-pointer rounded-[45px] px-[40px] py-[16px] flex items-center gap-[10px]`}
+                                >
+                                    <div>
+                                        <Image
+                                            src={activeIndex === index ? data.iconwhite : data.iconpink}
+                                            width={24}
+                                            height={24}
+                                            alt={data.alt}
+                                            className='text-white'
+                                        />
+                                    </div>
+                                    <span
+                                        className={`${activeIndex === index ? 'text-white' : 'text-[#FF0080]'
+                                            } font-semibold text-[16px] leading-[19px]`}
+                                    >
+                                        {data.title}
+                                    </span>
                                 </div>
-                            )
-                        })
-                    }
-                    <div className='cursor-pointer' onClick={() => {
-                        if (activeIndex < ExploreData.length - 1) { setActiveIndex(activeIndex + 1) }
-                        else { setActiveIndex(0) }
-                    }}>
-                        <Image src="/svg/explorenexticon.svg" width={40} height={40} alt="right arrow" className='' />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                    <div className='nextheader cursor-pointer h-[35px] w-[35px] md:h-[55px] md:w-[55px] overflow-hidden'>
+                        <Image src="/svg/explorenexticon.svg" className='h-full w-full' width={30} height={30} alt="left arrow" />
                     </div>
                 </div>
-            </div >
+
+            </div>
         </>
     )
 }

@@ -9,13 +9,13 @@ type SwiperCardData = {
     heroSwiperData: CardDataType;
 }
 
-const ExploreSwiperCard = ({ heroSwiperData }: SwiperCardData) => {
+const TrustedSwiperCards = ({ heroSwiperData }: SwiperCardData) => {
 
     const [isPlay, setIsPlay] = useState<boolean>(false);
 
 
     return (
-        <div className="h-[230px] w-full bg-white rounded-lg flex flex-col justify-between">
+        <div className="h-[375px] w-full bg-white rounded-lg flex flex-col justify-between">
             <div className="w-full relative h-full">
                 <ReactPlayer
                     url={heroSwiperData?.video}
@@ -68,4 +68,4 @@ const ExploreSwiperCard = ({ heroSwiperData }: SwiperCardData) => {
     );
 };
 
-export default ExploreSwiperCard;
+export default TrustedSwiperCards;
