@@ -51,13 +51,13 @@ const StepThree = () => {
                         Lorem ipsum dolor sit amet consectetur adipisc.
                     </p>
                 </div>
-                <div className="w-full h-full grid grid-cols-3 grid-rows-2 gap-6">
+                <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 gap-6">
                     {[...Array(6)].map((_, divIndex) => (
                         <div key={divIndex}>
                             {fileStates[divIndex]?.length > 0 ? (
                                 fileStates[divIndex].map(({ url }, index) => (
                                     <div
-                                        className="relative h-[224px] w-[204px] bg-white border border-[#CDCDCD] rounded-lg shadow-profile-photo"
+                                        className="relative h-[224px] bg-white border border-[#CDCDCD] rounded-lg shadow-profile-photo"
                                         key={index}
                                     >
                                         <div
@@ -81,7 +81,7 @@ const StepThree = () => {
                                     </div>
                                 ))
                             ) : (
-                                <div className="h-[224px] w-[204px] bg-white border border-[#CDCDCD] rounded-lg flex justify-center items-center">
+                                <div className="h-[224px] bg-white border border-[#CDCDCD] rounded-lg flex justify-center items-center">
                                     <Dropzone
                                         onDrop={(acceptedFiles) => onDrop(acceptedFiles, divIndex)}
                                     >

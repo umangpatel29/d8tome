@@ -88,6 +88,12 @@ input:focus {
   }
 }
 
+input[type='number'].custom-number-appearance::-webkit-inner-spin-button,
+input[type='number'].custom-number-appearance::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
 
 ::-webkit-scrollbar {
@@ -119,4 +125,14 @@ input:focus {
 
 :root {
   --swiper-theme-color: #FF0080 !important;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  @apply w-[7px] rounded-full bg-[#FF0080];
+}
+.custom-scroll::-webkit-scrollbar {
+  @apply h-[6px] w-[7px] cursor-pointer;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  @apply rounded-full bg-[#E0E5F1];
 }

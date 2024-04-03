@@ -62,7 +62,7 @@ const BirthdatePicker: React.FC = () => {
                     </div>
 
                     {showMonthDropdown && (
-                        <div ref={dropdownRef} className="border cursor-pointer absolute top-[40px] left-0 bg-white shadow-md" style={{ height: '200px', width: '100px', overflowY: 'auto' }}>
+                        <div ref={dropdownRef} className="custom-scroll border cursor-pointer absolute top-[40px] left-0 bg-white shadow-md" style={{ height: '200px', width: '100px', overflowY: 'auto' }}>
                             {months.map((month) => (
                                 <div key={month} onClick={() => console.log(`Month selected: ${month}`)} className='px-2'>
                                     {month}
@@ -84,7 +84,7 @@ const BirthdatePicker: React.FC = () => {
                     </div>
 
                     {showDayDropdown && (
-                        <div ref={dropdownRef} className="border cursor-pointer absolute top-[40px] left-0 bg-white shadow-md" style={{ height: '200px', width: '100px', overflowY: 'auto' }}>
+                        <div ref={dropdownRef} className="custom-scroll border cursor-pointer absolute top-[40px] left-0 bg-white shadow-md" style={{ height: '200px', width: '100px', overflowY: 'auto' }}>
                             {days.map((day) => (
                                 <div key={day} onClick={() => console.log(`Day selected: ${day}`)} className='px-2'>
                                     {day}
@@ -106,7 +106,7 @@ const BirthdatePicker: React.FC = () => {
                     </div>
 
                     {showYearDropdown && (
-                        <div ref={dropdownRef} className="border cursor-pointer absolute top-[50px] left-0 bg-white shadow-md" style={{ height: '200px', width: '100px', overflowY: 'auto' }}>
+                        <div ref={dropdownRef} className="custom-scroll border cursor-pointer absolute top-[50px] left-0 bg-white shadow-md" style={{ height: '200px', width: '100px', overflowY: 'auto' }}>
                             {years.map((year) => (
                                 <div key={year} onClick={() => console.log(`Year selected: ${year}`)} className='px-2'>
                                     {year}

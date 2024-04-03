@@ -114,7 +114,7 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                         <div>
                             {
                                 currentStep > 0 &&
-                                <button className='border border-primary px-8 py-4 text-primary font-semibold text-[14px] leading-5 rounded-[4px]' onClick={() => setCurrentStep((prev) => prev - 1)}>Previous Step</button>
+                                <button className='border border-primary px-8 py-3 text-primary font-semibold text-[14px] leading-5 rounded-[4px]' onClick={() => setCurrentStep((prev) => prev - 1)}>Previous Step</button>
                             }
                         </div>
 
@@ -122,7 +122,7 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                             {
                                 IsSkipStep && <p className='text-primary cursor-pointer text-[18px] font-bold'>Skip Step</p>
                             }
-                            <button className={`bg-primary px-8 py-5 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => setCurrentStep((prev) => prev + 1)}>Next Step</button>
+                            <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => setCurrentStep((prev) => prev + 1)}>Next Step</button>
 
                         </div>
                     </div>
@@ -130,8 +130,8 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                 </div>
             </div>
 
-            <div className='flex justify-center my-3'>
-                <button className={`bg-primary px-8 py-5 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => setIsHomePage()}>Go to Home Page</button>
+            <div className='flex justify-center mb-5'>
+                <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => setIsHomePage()}>Go to Home Page</button>
             </div>
             <div className='border py-12'>
                 <div className='container mx-auto flex flex-col md:flex-row gap-5 justify-between items-center '>
