@@ -31,7 +31,7 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
             birthdate: ''
         },
         validationSchema: SignupSchema,
-        onSubmit: (values) => {
+        onSubmit: (values: any) => {
             console.log(values);
         },
     });
@@ -48,7 +48,7 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
         if (currentStep === steps.length - 1) {
             setIsSkipStep(true)
         }
-    }, [currentStep])
+    }, [currentStep, steps.length])
 
     return (
         <div>

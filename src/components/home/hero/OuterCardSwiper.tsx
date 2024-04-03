@@ -12,15 +12,15 @@ type CardDataProps = {
 function OuterCardSwiper({ setVideoCardData, leftCardData }: CardDataProps) {
 
   const [characters, setCharacters] = useState(leftCardData);
-  const [lastDirection, setLastDirection] = useState<string>("");
+  // const [lastDirection, setLastDirection] = useState<string>("");
   const [activeCardIndex, setActiveCardIndex] = useState(0);
 
   const swiped = (direction: string, nameToDelete: string) => {
-    console.log("🚀 ~ swiped ~ nameToDelete:", nameToDelete)
+    console.log("🚀 ~ swiped ~ nameToDelete:", nameToDelete, direction)
 
-    if (direction) {
-      setLastDirection(direction);
-    }
+    // if (direction) {
+    //   setLastDirection(direction);
+    // }
 
     // Remove the swiped card from the characters array
     const newCharacters = characters.filter(

@@ -1,8 +1,7 @@
 import React from 'react'
 import BirthdatePicker from './datepicker'
 import { CreateAccountType } from '@/types/createaccounttype/createaccounttype'
-import { FormikProps } from 'formik';
-
+import { FormikProps } from 'formik'
 
 interface StepOneProps {
   formik: FormikProps<CreateAccountType>;

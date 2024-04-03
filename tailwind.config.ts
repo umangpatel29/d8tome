@@ -8,10 +8,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        inter: "Inter",
-        poppins: "Poppins"
-      },
       backgroundImage: {
         "light-pink":
           "linear-gradient(90deg, rgba(232, 1, 43, 0.1) 0%, rgba(246, 121, 79, 0.1) 100%)",
