@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import HomePage from '@/components/home'
 import CreateAccountSteps from '@/components/createaccount/steps'
+import Footer from '@/components/common/footer'
 
 const Home = () => {
   const [isHomePage, setIsHomePage] = useState<boolean>(false)
@@ -9,7 +10,11 @@ const Home = () => {
     <>
       {
         isHomePage ?
-          <HomePage /> : <CreateAccountSteps setIsHomePage={() => setIsHomePage(true)} />
+          <>
+            <HomePage />
+            <Footer />
+          </>
+          : <CreateAccountSteps setIsHomePage={() => setIsHomePage(true)} />
       }
     </>
   )
