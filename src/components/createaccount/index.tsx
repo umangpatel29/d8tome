@@ -9,6 +9,8 @@ import { CreateAccountType } from '@/types/createaccounttype/createaccounttype';
 import StepTwo from './step2';
 import StepFour from './step4';
 import StepThree from './step3';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignupSchema = Yup.object().shape({
     firstname: Yup.string().required('Required'),
@@ -23,6 +25,11 @@ interface CreateAccountStepsProps {
 const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
 
     const [IsSkipStep, setIsSkipStep] = useState(false)
+    const [isRequiredField, setIsRequiredField] = useState(false)
+    const steps = [0, 1, 2, 3];
+
+    const [currentStep, setCurrentStep] = useState(0);
+    const [completedSteps, setCompletedSteps] = useState([false, false, false, false]); // Array to track completed steps
 
     const formik = useFormik<CreateAccountType>({
         initialValues: {
@@ -34,22 +41,61 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
         validationSchema: SignupSchema,
         onSubmit: (values: any) => {
             console.log(values);
+            // Assuming validation passed, mark the current step as completed
+            const updatedCompletedSteps = [...completedSteps];
+            updatedCompletedSteps[currentStep] = true;
+            setCompletedSteps(updatedCompletedSteps);
+            // Move to the next step if not on the last step
+            if (currentStep < 3) {
+                setCurrentStep(currentStep + 1);
+            }
         },
     });
 
-
-    const [currentStep, setCurrentStep] = useState(0);
-    const steps = [0, 1, 2, 3];
-
-    const handleStepClick = (step: React.SetStateAction<number>) => {
-        setCurrentStep(step);
+    const handleStepClick = (step: number) => {
+        // Only allow accessing completed steps
+        if (completedSteps[step]) {
+            setCurrentStep(step);
+        }
     };
 
-    useEffect(() => {
-        if (currentStep === steps.length - 1) {
-            setIsSkipStep(true)
+    const [arePhotosUploaded, setArePhotosUploaded] = useState(false); // State variable to track photo upload status
+
+    const handlePhotosUploaded = () => {
+        setArePhotosUploaded(true);
+        handleStepClick(3)
+    };
+
+    const handleNextStep = () => {
+        // Check if all required fields are filled in the current step
+        if (formik.isValid && formik.dirty) {
+            formik.handleSubmit();
+            // setCurrentStep((prev) => prev + 1) // Submit the form if validation passes
+        } else {
+            const firstErrorField = Object.keys(formik.errors)[0];
+            if (firstErrorField) {
+                const errorElement = document.getElementsByName(firstErrorField)[0];
+                errorElement.scrollIntoView({ behavior: "smooth", block: "center" });
+
+                // Display error message below the input field
+                const errorMessage = formik.errors[firstErrorField as keyof typeof formik.errors];
+                const errorField = document.getElementById(`${firstErrorField}-error`);
+                if (errorField) {
+                    errorField.innerText = errorMessage as any;
+                }
+            }
         }
-    }, [currentStep, steps.length])
+    };
+
+    const handleNextClick = () => {
+        if (currentStep < 2) { handleNextStep(); }
+        if (arePhotosUploaded) {
+            handleNextStep();
+        } else if (currentStep === 2 && !arePhotosUploaded) {
+            const notify = () => toast.error("Please upload at least 2 photos.");
+            notify()
+        };
+    }
 
     return (
         <div>
@@ -62,7 +108,6 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                 <div className=' w-full md:w-[70%] mx-auto mt-7 '>
                     <div className='border shadow-sm w-full md:pt-16 pt-5 md:pb-20 pb-5 px-3 md:px-0'
                     >
-
                         <div className="w-full md:w-[80%] mx-auto mt-5">
                             {/* //steps ****** */}
                             <div className="w-full px-4">
@@ -72,7 +117,6 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                                             {index > 0 && <div className={`flex-grow mx-3 h-1 bg-gray-300 mt-1 ${currentStep >= index && 'bg-primary'}`}></div>}
                                             <div
                                                 className={`relative cursor-pointer flex justify-center items-center w-8 h-8 rounded-full border border-gray-300 ${currentStep >= index ? 'bg-primary border-primary' : ''}`}
-                                                onClick={() => handleStepClick(index)}
                                             >
                                                 {currentStep >= index && <span className="text-white">{index + 1}</span>}
                                             </div>
@@ -87,22 +131,22 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                             <div className=''>
                                 {
                                     currentStep === 0 && (
-                                        <StepOne formik={formik} />
+                                        <StepOne formik={formik} handleStepClick={handleStepClick} isRequiredField={isRequiredField} />
                                     )
                                 }
                                 {
                                     currentStep === 1 && (
-                                        <StepTwo />
+                                        <StepTwo handleStepClick={handleStepClick} />
                                     )
                                 }
                                 {
                                     currentStep === 2 && (
-                                        <StepThree />
+                                        <StepThree handlePhotosUploaded={handlePhotosUploaded} />
                                     )
                                 }
                                 {
                                     currentStep === 3 && (
-                                        <StepFour />
+                                        <StepFour handleStepClick={handleStepClick} />
                                     )
                                 }
                             </div>
@@ -122,7 +166,7 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                             {
                                 IsSkipStep && <p className='text-primary cursor-pointer text-[18px] font-bold'>Skip Step</p>
                             }
-                            <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => setCurrentStep((prev) => prev + 1)}>Next Step</button>
+                            <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => { handleNextClick(); setIsRequiredField(true) }}>Next Step</button>
 
                         </div>
                     </div>
@@ -153,7 +197,7 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                     </div>
                 </div>
             </div>
-
+            <ToastContainer />
         </div>
     )
 }

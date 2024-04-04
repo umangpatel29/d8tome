@@ -80,7 +80,7 @@ const ExploreHeader = () => {
                     <span className='font-bold text-[36px] leading-[53px]'>Explore By Tags</span>
                 </div>
                 <div className='flex gap-2 items-center md:gap-4 md:mt-20 mt-5'>
-                    <div className='prevheader cursor-pointer h-[35px] w-[35px] md:h-[55px] md:w-[55px] overflow-hidden'>
+                    <div onClick={() => { if (activeIndex > 0) { setActiveIndex(activeIndex - 1) } }} className='prevheader cursor-pointer h-[35px] w-[35px] md:h-[55px] md:w-[55px] overflow-hidden'>
                         <Image src="/svg/explorenexticon.svg" className='transform rotate-180 h-full w-full' width={30} height={30} alt="left arrow" />
                     </div>
                     <Swiper
@@ -135,7 +135,9 @@ const ExploreHeader = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                    <div className='nextheader cursor-pointer h-[35px] w-[35px] md:h-[55px] md:w-[55px] overflow-hidden'>
+                    <div onClick={() => {
+                        if (activeIndex < ExploreData.length - 1) { setActiveIndex(activeIndex + 1) }
+                    }} className='nextheader cursor-pointer h-[35px] w-[35px] md:h-[55px] md:w-[55px] overflow-hidden'>
                         <Image src="/svg/explorenexticon.svg" className='h-full w-full' width={30} height={30} alt="left arrow" />
                     </div>
                 </div>

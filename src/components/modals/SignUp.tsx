@@ -7,11 +7,11 @@ import Email from './Email';
 type HeroVideoProps = {
     forModal?: boolean;
     setForModal: (quantity: boolean) => void;
+    setIsEmailVerification: (quantity: boolean) => void;
     setIsPhoneNumber: (quantity: boolean) => void;
-    setIsSignUp: (quantity: boolean) => void;
 };
 
-const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVideoProps) => {
+const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumber }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false)
     const closeModal = () => {
@@ -81,12 +81,12 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
                                 />
                             </div>
                             <div className='flex justify-between'>
-                                <span className='font-Poppins text-[#111827] font-semibold text-[20px] leading-7 tracking-[-2%]'>Sign in</span>
-                                <span onClick={() => { closeModal(); setIsSignUp(true) }} className='font-Poppins font-medium text-[14px] cursor-pointer leading-[20px] text-[#1E22FB]'>I don&apos;t have an account</span>
+                                <span className='font-Poppins text-[#111827] font-semibold text-[20px] leading-7 tracking-[-2%]'>Sign up</span>
                             </div>
                             <div className='flex flex-col gap-3'>
                                 <input type="text" placeholder='Email' className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
                                 <input type="password" placeholder='Password' className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
+                                <input type="password" placeholder='Confirm Password' className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
                                 <p className='font-Poppins font-normal text-[12px] leading-5 text-[#374151]'>
                                     By signing up, you agree to the
                                     <span className='font-Poppins font-medium underline text-[12px] mx-1 leading-5 text-[#374151]'>
@@ -98,7 +98,7 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
                                 </p>
                             </div>
                             <div className='flex flex-col gap-5'>
-                                <button onClick={() => { closeModal(); }} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>Agree and Sign in</button>
+                                <button onClick={() => { closeModal(); setIsEmailVerification(true) }} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>Agree and Sign up</button>
                                 <span className='border-t-[1px] border-[#6B7280] relative'>
                                     <span className='absolute bg-white px-[7px] font-Poppins text-[#6B7280] font-semibold text-[14px] leading-5 tracking-[0.3px] top-[-11px] left-[33%]'>or sign up with</span>
                                 </span>
@@ -155,4 +155,4 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
     )
 }
 
-export default SignIn
+export default SignUp

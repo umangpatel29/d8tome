@@ -12,11 +12,17 @@ const PricePlan = ({ setForModal, forModal, setIsWelcome }: HeroVideoProps) => {
     const [monthly, setMonthly] = useState(true)
     const [yearly, setYearly] = useState(false)
 
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, []);
 
     return (
         <>
-            {forModal && <div>
-                <div className='bg-black flex items-center justify-center w-full h-full pt-20 relative z-[9999]'>
+            {forModal &&
+                <div className='bg-black fixed top-0 left-0 flex items-center overflow-y-auto justify-center w-full h-screen pt-20 z-[9999]'>
                     <div className=' relative  bg-black my-5'>
                         <div className='flex flex-col gap-10 items-center'>
                             <div className='w-full text-center flex flex-col gap-5'>
@@ -256,7 +262,7 @@ const PricePlan = ({ setForModal, forModal, setIsWelcome }: HeroVideoProps) => {
                         </div>
                     </div>
                 </div>
-            </div>}
+            }
         </>
     )
 }

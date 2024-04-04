@@ -7,10 +7,10 @@ import VerifyEmail from './VerifyEmail';
 type HeroVideoProps = {
     forModal?: boolean;
     setForModal: (quantity: boolean) => void;
-    setIsPricePlan: (quantity: boolean) => void;
+    setIsPhoneNumber: (quantity: boolean) => void;
 };
 
-const EmailVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVideoProps) => {
+const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [verificationCode, setVerificationCode] = useState<string[]>(['', '', '', '', '', '']);
     const inputsRef = useRef<HTMLInputElement[]>([]);
@@ -133,7 +133,10 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
                                     />
                                 ))}
                             </div>
-                            <button onClick={() => { closeModal(); setIsPricePlan(true) }} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>Next</button>
+                            <div className='flex flex-col gap-[10px]'>
+                                <button onClick={() => { closeModal(); setIsPhoneNumber(true) }} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>Next</button>
+                                <div className='w-full flex justify-end'><button onClick={() => { closeModal(); }} className='font-Poppins text-[#FF0080] bg-white py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[80px]'>Re-Send</button></div>
+                            </div>
                         </div>
                     </div>
                 </Modal>

@@ -62,10 +62,10 @@ const Footer = () => {
                         <div>Privacy</div>
                         <div>Contact</div>
                     </div>
-                    <div className='flex gap-4'>
-                        <Image src='/svg/youtube.svg' alt='' width={20} height={20} />
+                    <div className='flex gap-4 bg-cover'>
+                        <Image src='/svg/youtube.svg' alt='' width={20} height={20} className=''/>
                         <Image src='/svg/instagram.svg' alt='' width={20} height={20} />
-                        <Image src='/svg/facebook.svg' alt='' width={10} height={10} />
+                        <Image src='/svg/facebook.svg' alt='' width={20} height={20} />
                         <Image src='/svg/linkedin.svg' alt='' width={20} height={20} />
                         <Image src='/svg/twitter.svg' alt='' width={20} height={20} />
                     </div>

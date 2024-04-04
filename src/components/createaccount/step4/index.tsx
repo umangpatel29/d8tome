@@ -1,6 +1,10 @@
 import React from 'react'
 
-const StepFour = () => {
+interface StepOneProps {
+    handleStepClick: (step: number) => void;
+}
+
+const StepFour = ({ handleStepClick }: StepOneProps) => {
     return (
         <div>
             <div>
