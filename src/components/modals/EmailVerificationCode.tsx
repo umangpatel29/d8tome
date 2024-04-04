@@ -23,13 +23,16 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
 
     const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
+        // If this is the last input field, limit the value to a single digit
+        const newValue = index === 5 ? value.slice(0, 1) : value;
+
         setVerificationCode(prevCode => {
             const newCode = [...prevCode];
-            newCode[index] = value;
+            newCode[index] = newValue;
             return newCode;
         });
 
-        if (value && index < 5 && inputsRef.current[index + 1]) {
+        if (newValue && index < 5 && inputsRef.current[index + 1]) {
             inputsRef.current[index + 1].focus();
         }
     };

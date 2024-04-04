@@ -23,13 +23,16 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
 
     const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
+        // If this is the last input field, limit the value to a single digit
+        const newValue = index === 5 ? value.slice(0, 1) : value;
+
         setVerificationCode(prevCode => {
             const newCode = [...prevCode];
-            newCode[index] = value;
+            newCode[index] = newValue;
             return newCode;
         });
 
-        if (value && index < 5 && inputsRef.current[index + 1]) {
+        if (newValue && index < 5 && inputsRef.current[index + 1]) {
             inputsRef.current[index + 1].focus();
         }
     };
@@ -127,7 +130,7 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
                                         type="number"
                                         maxLength={1}
                                         value={digit}
-                                        onChange={event => handleInputChange(index, event)}
+                                        onChange={event => { handleInputChange(index, event) }}
                                         onKeyDown={event => handleInputAndKeyDown(index, event)}
                                         className='w-[54px] h-[60px] text-[#9CA3AF] rounded-[8px] border-[1px] text-center text-[30px] border-[#9CA3AF]'
                                     />

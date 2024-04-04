@@ -56,7 +56,7 @@ const NavbarLogin = () => {
 
                     </div>
                     <div className="flex gap-3">
-                        <button onClick={() => setIsSignIn(!isSignIn)} className='hidden md:flex px-6 py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-primary border border-primary'>Sing Up</button>
+                        <button onClick={() => setIsSignIn(!isSignIn)} className='hidden md:flex px-6 py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-primary border border-primary'>Sign Up</button>
                         <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Log In</button>
                     </div>
 
