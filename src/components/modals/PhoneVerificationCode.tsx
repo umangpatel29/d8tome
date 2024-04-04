@@ -124,7 +124,7 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
                                                 inputsRef.current[index] = el;
                                             }
                                         }}
-                                        type="text"
+                                        type="number"
                                         maxLength={1}
                                         value={digit}
                                         onChange={event => handleInputChange(index, event)}

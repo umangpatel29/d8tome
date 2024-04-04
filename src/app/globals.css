@@ -88,13 +88,13 @@ input:focus {
   }
 }
 
-input[type='number'].custom-number-appearance::-webkit-inner-spin-button,
-input[type='number'].custom-number-appearance::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
-
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -135,4 +135,12 @@ input[type='number'].custom-number-appearance::-webkit-outer-spin-button {
 }
 .custom-scroll::-webkit-scrollbar-track {
   @apply rounded-full bg-[#E0E5F1];
+}
+
+.pagination-swiper {
+  position: absolute;
+  bottom: 35px !important;
+  text-align: center;
+  --swiper-theme-color: #fff;
+  z-index: 900;
 }

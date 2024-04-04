@@ -1,6 +1,13 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
+import PassionModel from '@/components/modals/passionModel'
+import SexualOrientation from '@/components/modals/SexualOrientation';
 
 const StepFour = () => {
+
+    const [passionModel, setPassionModel] = useState(false);
+    const [modelIsOpen, setModelIsOpen] = useState(false);
+
     return (
         <div>
             <div>
@@ -11,18 +18,25 @@ const StepFour = () => {
                 <div>
                     <p className='text-[18px] font-semibold leading-[20px] text-[#3A3A3A]'>Passions</p>
                     <div className='flex items-center gap-5 justify-between mt-2'>
-                        <div className='border border-[#CDCDCD] text-[#CDCDCD] text-[18px] px-5 py-4 rounded-full font-medium leading-[20px]  text-center cursor-pointer'>
-                            + Add Passions </div>
+                        <div className='border border-[#CDCDCD] text-[#CDCDCD] text-[18px] px-5 py-4 rounded-full font-medium leading-[20px]  text-center cursor-pointer'
+                            onClick={() => setPassionModel(true)}
+                        >
+                            + Add Passions
+                        </div>
                     </div>
                 </div>
                 <div>
                     <p className='text-[18px] font-semibold leading-[20px] text-[#3A3A3A]'>Sexual Orientation</p>
                     <div className='flex items-center gap-5 justify-between mt-2'>
-                        <div className='border border-[#CDCDCD] text-[#CDCDCD] text-[18px] px-5 py-4 rounded-full font-medium leading-[20px]  text-center cursor-pointer'>
+                        <div className='border border-[#CDCDCD] text-[#CDCDCD] text-[18px] px-5 py-4 rounded-full font-medium leading-[20px]  text-center cursor-pointer'
+                            onClick={() => setModelIsOpen(true)}
+                        >
                             + Add Sexual orientation</div>
                     </div>
                 </div>
             </div>
+            <PassionModel modelIsOpen={passionModel} setModelIsOpen={() => setModelIsOpen(!passionModel)} />
+            <SexualOrientation modelIsOpen={modelIsOpen} setModelIsOpen={() => setModelIsOpen(!modelIsOpen)} />
         </div>
     )
 }

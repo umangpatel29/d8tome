@@ -16,13 +16,12 @@ const SignupSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
 });
 
-interface CreateAccountStepsProps {
-    setIsHomePage: () => void;
-}
 
-const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
+const CreateAccountSteps = () => {
 
     const [IsSkipStep, setIsSkipStep] = useState(false)
+    const [currentStep, setCurrentStep] = useState(3);
+    const steps = [0, 1, 2, 3];
 
     const formik = useFormik<CreateAccountType>({
         initialValues: {
@@ -37,10 +36,6 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
         },
     });
 
-
-    const [currentStep, setCurrentStep] = useState(0);
-    const steps = [0, 1, 2, 3];
-
     const handleStepClick = (step: React.SetStateAction<number>) => {
         setCurrentStep(step);
     };
@@ -48,6 +43,8 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
     useEffect(() => {
         if (currentStep === steps.length - 1) {
             setIsSkipStep(true)
+        } else {
+            setIsSkipStep(false)
         }
     }, [currentStep, steps.length])
 
@@ -130,9 +127,6 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                 </div>
             </div>
 
-            <div className='flex justify-center mb-5'>
-                <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => setIsHomePage()}>Go to Home Page</button>
-            </div>
             <div className='border py-12'>
                 <div className='container mx-auto flex flex-col md:flex-row gap-5 justify-between items-center '>
                     <div>
@@ -153,7 +147,6 @@ const CreateAccountSteps = ({ setIsHomePage }: CreateAccountStepsProps) => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

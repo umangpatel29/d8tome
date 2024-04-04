@@ -58,3 +58,49 @@ export const WelcomeData = [
         welcomeFullDesc: "Lorem ipsum dolor sit amet consectetur. Ornare diam aliquet ut facilisis lectus pretium amet tellus est. Facilisis facilisis."
     },
 ]
+
+
+export const passionsdata = [
+    'SoundCloud', 'Spaspa', 'SoundCloud', 'ludo', 'Sound', 'Spa', 'SoundCloud', 'ludoludo', 'SoundCloud', 'Spa', 'SoundCloud', 'ludo', 'SoundCloud', 'Spa', 'SoundCloud', 'ludo',
+    'SoundCloud', 'Spaspa', 'SoundCloud', 'ludo', 'Sound', 'Spa', 'SoundCloud', 'ludoludo', 'SoundCloud', 'Spa', 'SoundCloud', 'ludo', 'SoundCloud', 'Spa', 'SoundCloud', 'ludo',
+    'SoundCloud', 'Spaspa', 'SoundCloud', 'ludo', 'Sound', 'Spa', 'SoundCloud', 'ludoludo', 'SoundCloud', 'Spa', 'SoundCloud', 'ludo', 'SoundCloud', 'Spa', 'SoundCloud', 'ludo',
+    'SoundCloud', 'Spaspa', 'Cloud', 'ludoludo',
+    'SoundCloud', 'Spaspa', 'Sound', 'ludo',
+    'SoundCloud', 'Spa', 'music', 'ludoludo',
+    'SoundCloud', 'Spa', 'SoundCloud', 'ludo',
+]
+
+export const frequentlyAskedQuestions = [
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor'
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor'
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor'
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor'
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor'
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor'
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor'
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+        answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor'
+    },
+]

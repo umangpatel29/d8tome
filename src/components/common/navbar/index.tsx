@@ -189,6 +189,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
       {isOpen && (
         <div
           className={`absolute z-50 slide-right md:!hidden border-t-2 flex-col px-5 h-screen bg-white gap-5 pt-5 transition-all duration-300 w-full left-[-500px] transform ${isOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
