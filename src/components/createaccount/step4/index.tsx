@@ -3,10 +3,15 @@ import React, { useState } from 'react'
 import PassionModel from '@/components/modals/passionModel'
 import SexualOrientation from '@/components/modals/SexualOrientation';
 
-const StepFour = () => {
+interface StepOneProps {
+    handleStepClick: (step: number) => void;
+}
+
+const StepFour = ({ handleStepClick }: StepOneProps) => {
 
     const [passionModel, setPassionModel] = useState(false);
     const [modelIsOpen, setModelIsOpen] = useState(false);
+
 
     return (
         <div>
@@ -35,8 +40,8 @@ const StepFour = () => {
                     </div>
                 </div>
             </div>
-            <PassionModel modelIsOpen={passionModel} setModelIsOpen={() => setModelIsOpen(!passionModel)} />
-            <SexualOrientation modelIsOpen={modelIsOpen} setModelIsOpen={() => setModelIsOpen(!modelIsOpen)} />
+            <PassionModel modelIsOpen={passionModel} setModelIsOpen={setPassionModel} />
+            <SexualOrientation modelIsOpen={modelIsOpen} setModelIsOpen={setModelIsOpen} />
         </div>
     )
 }

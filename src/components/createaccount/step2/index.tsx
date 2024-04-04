@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react'
 
+interface StepOneProps {
+    handleStepClick: (step: number) => void;
+}
 
-const StepTwo = () => {
+const StepTwo = ({ handleStepClick }: StepOneProps) => {
 
     const [isGender, setIsGender] = useState('men')
     const [showMe, setShowMe] = useState('women')

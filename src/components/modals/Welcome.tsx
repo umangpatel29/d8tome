@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { WelcomeData } from '@/constant/heroconstant';
 import Modal from 'react-modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperType } from "swiper";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -17,6 +18,9 @@ type HeroVideoProps = {
 
 const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [swiper, setSwiper] = useState<SwiperType | null>(null);
+
     const closeModal = () => {
         setIsOpen(false);
         setForModal(false);
@@ -28,6 +32,14 @@ const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
         document.body.style.overflow = "hidden";
     };
 
+    const handleSwiper = () => {
+        if (activeIndex < WelcomeData.length - 1)
+            setActiveIndex(activeIndex + 1)
+        if (activeIndex === WelcomeData.length - 1)
+            closeModal()
+        swiper?.slideNext()
+    }
+
     useEffect(() => {
         if (forModal) {
             openModal();
@@ -36,6 +48,7 @@ const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
             closeModal();
         }
     }, [forModal]);
+    console.log(activeIndex, "activeIndex")
     return (
         <>
             <div className='w-[543px]'>
@@ -64,7 +77,7 @@ const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
                     }}
                 >
                     <div className='w-full py-[38px] px-[30px] h-[588px] relative'>
-                        <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
+                        <Swiper pagination={true} modules={[Pagination]} onSwiper={(swiper) => setSwiper(swiper)} initialSlide={activeIndex} onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)} className="mySwiper">
                             {WelcomeData.map((data, index) => {
                                 return (
                                     <>
@@ -109,7 +122,7 @@ const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
                     </div>
                     <div className='flex justify-center gap-[11px] pb-7'>
                         <button onClick={closeModal} className='font-Poppins text-[#FF0080] bg-white border-[1px] border-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[154px] text-center'>Dismiss</button>
-                        <button className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[154px] text-center'>Next</button>
+                        <button onClick={() => { handleSwiper() }} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[154px] text-center'>Next</button>
                     </div>
 
                 </Modal >

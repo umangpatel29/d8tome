@@ -150,7 +150,10 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
                             </div>
                             <div className='flex flex-col gap-[14px]'>
                                 <span className='font-Poppins font-medium text-[14px] leading-5 text-[#1E22FB]'>Update a contact info</span>
-                                <button onClick={() => { closeModal(); setIsPricePlan(true) }} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>Next</button>
+                                <div className='flex flex-col gap-[10px]'>
+                                    <button onClick={() => { closeModal(); setIsPricePlan(true) }} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>Next</button>
+                                    <div className='w-full flex justify-end'><button onClick={() => { closeModal(); }} className='font-Poppins text-[#FF0080] bg-white py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[80px]'>Re-Send</button></div>
+                                </div>
                             </div>
                         </div>
                     </div>

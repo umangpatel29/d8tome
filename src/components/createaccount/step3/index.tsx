@@ -1,9 +1,13 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropzone from "react-dropzone";
 
-const StepThree = () => {
+interface StepOneProps {
+    handlePhotosUploaded: () => void;
+}
+
+const StepThree = ({ handlePhotosUploaded }: StepOneProps) => {
     const [fileStates, setFileStates] = useState<
         Array<{ file: File; url: string }[]>
     >([[]]);
@@ -38,6 +42,14 @@ const StepThree = () => {
             return newState;
         });
     };
+
+    useEffect(() => {
+        const uploadedPhotosCount = fileStates.reduce((acc, current) => acc + current.length, 0);
+        if (uploadedPhotosCount >= 2) {
+            handlePhotosUploaded();
+        }
+    }, [fileStates]);
+
     return (
         // <div className="w-full h-[calc(100vh-90px)] flex justify-center items-center">
         //   <div className="w-[834px] h-[834px] shadow-lg p-[87px] pt-[58px]">

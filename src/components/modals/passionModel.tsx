@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 interface passionModelType {
     modelIsOpen: boolean;
-    setModelIsOpen: () => void;
+    setModelIsOpen: (val: boolean) => void;
 }
 const PassionModel = ({ modelIsOpen, setModelIsOpen }: passionModelType) => {
 
@@ -16,7 +16,7 @@ const PassionModel = ({ modelIsOpen, setModelIsOpen }: passionModelType) => {
         <Modal
             ariaHideApp={false}
             isOpen={modelIsOpen}
-            onRequestClose={setModelIsOpen}
+            onRequestClose={() => setModelIsOpen(!modelIsOpen)}
             style={{
                 overlay: {
                     backgroundColor: "rgba(0,0,0,0.7)",
@@ -37,7 +37,7 @@ const PassionModel = ({ modelIsOpen, setModelIsOpen }: passionModelType) => {
             <div className="top-[-1px] z-10 bg-white">
                 <div
                     className="float-right cursor-pointer pr-2 pt-8 sm:pr-[15px] sm:pt-[15px]"
-                    onClick={setModelIsOpen}
+                    onClick={() => setModelIsOpen(!modelIsOpen)}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -76,10 +76,10 @@ const PassionModel = ({ modelIsOpen, setModelIsOpen }: passionModelType) => {
                     </div>
                 </div>
                 <div className='absolute bottom-0 w-full'>
-                    <div className='border relative'>
+                    <div className='relative'>
                         <Image src='/images/passionmodal.png' alt='' width={880} height={400} className='' />
                         <div className='absolute top-0 right-0 bottom-0 left-0 flex justify-center items-end pb-8'>
-                            <button onClick={() => setModelIsOpen()} className='text-white font-smibold text-4 leading-5 bg-primary rounded px-12 py-5'>Continue</button>
+                            <button onClick={() => setModelIsOpen(!modelIsOpen)} className='text-white font-smibold text-4 leading-5 bg-primary rounded px-12 py-5'>Continue</button>
                         </div>
                     </div>
                 </div>
