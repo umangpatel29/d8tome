@@ -24,7 +24,7 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
     const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         // If this is the last input field, limit the value to a single digit
-        const newValue = index === 5 ? value.slice(0, 1) : value;
+        const newValue = index === 5 ? value.slice(0, 1) : value.slice(0, 1); // Limit value to single digit
 
         setVerificationCode(prevCode => {
             const newCode = [...prevCode];
