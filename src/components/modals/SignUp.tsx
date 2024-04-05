@@ -1,19 +1,30 @@
 "use client"
+import { Auth } from '@/services/http/auth';
+import { Verify } from '@/services/http/verify';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import Modal from "react-modal";
-import Email from './Email';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Spinner from '../spinner/Spinner';
 
 type HeroVideoProps = {
     forModal?: boolean;
     setForModal: (quantity: boolean) => void;
     setIsEmailVerification: (quantity: boolean) => void;
     setIsPhoneNumber: (quantity: boolean) => void;
+    setIsSignIn: (quantity: boolean) => void;
 };
 
-const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumber }: HeroVideoProps) => {
+const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumber, setIsSignIn }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false)
+    const [email, setIsEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [isSpinner, setIsSpinner] = useState(false)
+    const router = useRouter();
     const closeModal = () => {
         setIsOpen(false);
         setForModal(false);
@@ -24,6 +35,43 @@ const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumbe
         setForModal(true);
         document.body.style.overflow = "hidden";
     };
+
+    const checkPassword = () => {
+        if ((password !== confirmPassword) && (password.length > 1)) {
+            const notify = () => toast.error("confirm password does not match");
+            notify()
+            setPassword("")
+            setConfirmPassword("")
+            setIsEmailVerification(false);
+        } else {
+            setPassword("")
+            setConfirmPassword("")
+            setIsEmail("")
+        }
+    }
+
+    const handleSignUp = async () => {
+        setIsSpinner(true)
+        await Auth.signUp({
+            email,
+            password,
+            confirmPassword,
+        }).then((res) => {
+            localStorage.setItem('access_token', res.data.accessToken)
+            closeModal()
+            setIsEmailVerification(true);
+            setIsSpinner(false)
+        }).catch((err) => {
+            setIsSpinner(false)
+            console.log(err)
+        })
+        Verify.emailOtp().then(() => {
+            console.log("heel")
+        }).catch((err) => {
+            console.log(err)
+        })
+    };
+
 
     useEffect(() => {
         if (forModal) {
@@ -82,11 +130,12 @@ const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumbe
                             </div>
                             <div className='flex justify-between'>
                                 <span className='font-Poppins text-[#111827] font-semibold text-[20px] leading-7 tracking-[-2%]'>Sign up</span>
+                                <span onClick={() => { closeModal(); setIsSignIn(true) }} className='font-Poppins font-medium text-[14px] cursor-pointer leading-[20px] text-[#1E22FB]'>I have an account</span>
                             </div>
                             <div className='flex flex-col gap-3'>
-                                <input type="text" placeholder='Email' className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
-                                <input type="password" placeholder='Password' className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
-                                <input type="password" placeholder='Confirm Password' className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
+                                <input type="text" placeholder='Email' onChange={(e) => setIsEmail(e.target.value)} value={email} className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
+                                <input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password} className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
+                                <input type="password" placeholder='Confirm Password' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
                                 <p className='font-Poppins font-normal text-[12px] leading-5 text-[#374151]'>
                                     By signing up, you agree to the
                                     <span className='font-Poppins font-medium underline text-[12px] mx-1 leading-5 text-[#374151]'>
@@ -98,7 +147,11 @@ const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumbe
                                 </p>
                             </div>
                             <div className='flex flex-col gap-5'>
-                                <button onClick={() => { closeModal(); setIsEmailVerification(true) }} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>Agree and Sign up</button>
+                                <button onClick={() => { checkPassword(); handleSignUp() }} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>
+                                    {
+                                        isSpinner ? <Spinner /> : "Agree and Sign up"
+                                    }
+                                </button>
                                 <span className='border-t-[1px] border-[#6B7280] relative'>
                                     <span className='absolute bg-white px-[7px] font-Poppins text-[#6B7280] font-semibold text-[14px] leading-5 tracking-[0.3px] top-[-11px] left-[33%]'>or sign up with</span>
                                 </span>
@@ -150,6 +203,7 @@ const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumbe
                     </div>
                 </Modal>
             </div>
+            <ToastContainer />
             {/* <Email forModal={play} setForModal={setPlay} /> */}
         </>
     )
