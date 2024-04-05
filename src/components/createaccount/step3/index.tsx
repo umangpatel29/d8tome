@@ -1,20 +1,26 @@
 "use client";
+import { CreateAccountType } from "@/types/createaccounttype/createaccounttype";
+import { FormikProps } from "formik";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Dropzone from "react-dropzone";
 
 interface StepOneProps {
-    handlePhotosUploaded: () => void;
+    formik: FormikProps<CreateAccountType>
 }
 
-const StepThree = ({ handlePhotosUploaded }: StepOneProps) => {
+const StepThree = ({ formik }: StepOneProps) => {
+
+    const { values, setFieldValue } = formik;
+
     const [fileStates, setFileStates] = useState<
         Array<{ file: File; url: string }[]>
-    >([[]]);
-    const acceptedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
+    >([]);
+
     const getImageBlob = (file: File) => {
         return URL.createObjectURL(file);
     };
+
     const onDrop = (acceptedFiles: File[], divIndex: number) => {
         if (acceptedFiles && acceptedFiles.length > 0) {
             setFileStates((prevState) => {
@@ -35,6 +41,7 @@ const StepThree = ({ handlePhotosUploaded }: StepOneProps) => {
             });
         }
     };
+
     const handleDelete = (divIndex: number, index: number) => {
         setFileStates((prevState) => {
             const newState = [...prevState];
@@ -44,11 +51,21 @@ const StepThree = ({ handlePhotosUploaded }: StepOneProps) => {
     };
 
     useEffect(() => {
-        const uploadedPhotosCount = fileStates.reduce((acc, current) => acc + current.length, 0);
-        if (uploadedPhotosCount >= 2) {
-            handlePhotosUploaded();
+        const storedData = localStorage.getItem('profilephotos');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            if (parsedData.length > 0) {
+                setFileStates(parsedData);
+            }
         }
+    }, []);
+
+    useEffect(() => {
+        const newArray = fileStates.filter(item => Array.isArray(item) && item.length > 0);
+        localStorage.setItem('profilephotos', JSON.stringify(newArray));
+        setFieldValue('profilephotos', newArray);
     }, [fileStates]);
+
 
     return (
         // <div className="w-full h-[calc(100vh-90px)] flex justify-center items-center">
@@ -127,10 +144,3 @@ const StepThree = ({ handlePhotosUploaded }: StepOneProps) => {
     );
 };
 export default StepThree;
-
-
-
-
-
-
-

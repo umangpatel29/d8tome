@@ -6,12 +6,21 @@ import Image from 'next/image';
 
 interface passionModelType {
     modelIsOpen: boolean;
+    sexualOrientationData: string[];
     setModelIsOpen: (val: boolean) => void;
+    setSexualOrientationData: (val: string[]) => void;
 }
-const SexualOrientation = ({ modelIsOpen, setModelIsOpen }: passionModelType) => {
+const SexualOrientation = ({ modelIsOpen, setModelIsOpen, sexualOrientationData, setSexualOrientationData }: passionModelType) => {
 
     const { width } = useWindowSize()
 
+    const togglePassion = (data: string) => {
+        if (sexualOrientationData.includes(data)) {
+            setSexualOrientationData(sexualOrientationData.filter(item => item !== data));
+        } else {
+            setSexualOrientationData([...sexualOrientationData, data]);
+        }
+    };
     return (
         <Modal
             ariaHideApp={false}
@@ -68,11 +77,16 @@ const SexualOrientation = ({ modelIsOpen, setModelIsOpen }: passionModelType) =>
                         <div className='font-normal text-[#808080] text-4 leading-5 text-center mt-3'>Let everyone know what you’re passionate about by adding it to your profile.</div>
                     </div>
                     <div className='flex h-[500px] custom-scroll overflow-y-scroll md:px-20 px-5 flex-wrap justify-center gap-3 mt-8'>
-                        {
-                            passionsdata.map((data, index) => (
-                                <div key={index} className='rounded-full border cursor-pointer border-[#A6A6A6] px-5 py-[10px] text-[14px] text-[#A6A6A6] leading-[20px]'>{data}</div>
-                            ))
-                        }
+                        {passionsdata.map((data, index) => (
+                            <div
+                                key={index}
+                                className={`rounded-full border cursor-pointer border-[#A6A6A6] px-5 py-[10px] text-[14px] text-[#A6A6A6] leading-[20px] ${sexualOrientationData.includes(data) ? 'bg-[#ffdbed]' : ''
+                                    }`}
+                                onClick={() => togglePassion(data)}
+                            >
+                                {data}
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div className='absolute bottom-0 w-full'>

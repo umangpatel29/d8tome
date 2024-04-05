@@ -1,16 +1,25 @@
 "use client"
 
-import React, { useState } from 'react'
+import { CreateAccountType } from '@/types/createaccounttype/createaccounttype';
+import { FormikProps } from 'formik';
+import React, { useEffect, useState } from 'react'
 
 interface StepOneProps {
     handleStepClick: (step: number) => void;
+    formik: FormikProps<CreateAccountType>
 }
 
-const StepTwo = ({ handleStepClick }: StepOneProps) => {
+const StepTwo = ({ handleStepClick, formik }: StepOneProps) => {
+
+    const { values, setFieldValue } = formik;
 
     const [isGender, setIsGender] = useState('men')
     const [showMe, setShowMe] = useState('women')
-    const [isShowOnPRofile, setisShowOnPRofile] = useState(false);
+
+    useEffect(() => {
+        setFieldValue('gender', isGender);
+        setFieldValue('showme', showMe);
+    }, [isGender, showMe])
 
     return (
         <div>
@@ -28,8 +37,16 @@ const StepTwo = ({ handleStepClick }: StepOneProps) => {
                         <div onClick={() => setIsGender('other')} className={`${isGender === 'other' ? 'bg-[#ffdbed] text-primary' : ' border border-[#CDCDCD] text-[#CDCDCD]'}  text-[18px] w-full py-4 rounded-full font-medium leading-[20px]  text-center cursor-pointer`}>Other</div>
                     </div>
                     <div className='flex items-center gap-2 mt-2'>
-                        <input type="checkbox" id='isShowOnPRofile' checked={isShowOnPRofile} name='isShowOnProfile' onChange={() => setisShowOnPRofile(!isShowOnPRofile)} className='cursor-pointer accent-[#ee4198] h-4 w-4' />
-                        <label htmlFor="isShowOnPRofile" className='text-[#7F7F7F] cursor-pointer text-[16px] mt-0 md:mt-1 leading-[21px]'>Show my gender on my profile</label>
+                        <input
+                            type="checkbox"
+                            id='isShowOnProfile'
+                            checked={values.showmygender}
+                            name='isShowOnProfile'
+                            onChange={() => setFieldValue('showmygender', !values.showmygender)}
+                            className='cursor-pointer accent-[#ee4198] h-4 w-4'
+                        />
+
+                        <label htmlFor="isShowOnProfile" className='text-[#7F7F7F] cursor-pointer text-[16px] mt-0 md:mt-1 leading-[21px]'>Show my gender on my profile</label>
                     </div>
                 </div>
                 <div className='mt-2'>

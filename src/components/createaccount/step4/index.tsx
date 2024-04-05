@@ -2,15 +2,22 @@
 import React, { useState } from 'react'
 import PassionModel from '@/components/modals/passionModel'
 import SexualOrientation from '@/components/modals/SexualOrientation';
+import { FormikProps } from 'formik';
+import { CreateAccountType } from '@/types/createaccounttype/createaccounttype';
 
 interface StepOneProps {
-    handleStepClick: (step: number) => void;
+    formik: FormikProps<CreateAccountType>
 }
 
-const StepFour = ({ handleStepClick }: StepOneProps) => {
+const StepFour = ({ formik }: StepOneProps) => {
+    console.log("🚀 ~ StepFour ~ formik:", formik)
 
     const [passionModel, setPassionModel] = useState(false);
     const [modelIsOpen, setModelIsOpen] = useState(false);
+
+    const [passionModalData, setPassionModelData] = useState<string[]>([])
+    console.log("🚀 ~ StepFour ~ passionModalData:", passionModalData)
+    const [sexualOrientationData, setSexualOrientationData] = useState<string[]>([])
 
 
     return (
@@ -40,8 +47,8 @@ const StepFour = ({ handleStepClick }: StepOneProps) => {
                     </div>
                 </div>
             </div>
-            <PassionModel modelIsOpen={passionModel} setModelIsOpen={setPassionModel} />
-            <SexualOrientation modelIsOpen={modelIsOpen} setModelIsOpen={setModelIsOpen} />
+            <PassionModel modelIsOpen={passionModel} setModelIsOpen={setPassionModel} setPassionModelData={setPassionModelData} passionModalData={passionModalData} />
+            <SexualOrientation modelIsOpen={modelIsOpen} setModelIsOpen={setModelIsOpen} setSexualOrientationData={setSexualOrientationData} sexualOrientationData={sexualOrientationData} />
         </div>
     )
 }

@@ -16,8 +16,14 @@ const SignupSchema = Yup.object().shape({
     firstname: Yup.string().required('Required'),
     lastname: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
+    gender: Yup.string().required('Required'),
+    showmygender: Yup.string().required('Required'),
+    Showme: Yup.string().required('Required'),
+    lookingfor: Yup.string().required('Required'),
+    profilephoto: Yup.array().min(1, 'At least one photo is required'),
+    passion: Yup.string().required('Required'),
+    sexualorientation: Yup.string().required('Required'),
 });
-
 
 const CreateAccountSteps = () => {
 
@@ -25,7 +31,7 @@ const CreateAccountSteps = () => {
     const [isRequiredField, setIsRequiredField] = useState(false)
     const steps = [0, 1, 2, 3];
 
-    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStep, setCurrentStep] = useState(2);
     const [completedSteps, setCompletedSteps] = useState([false, false, false, false]); // Array to track completed steps
 
     const formik = useFormik<CreateAccountType>({
@@ -33,19 +39,18 @@ const CreateAccountSteps = () => {
             firstname: '',
             lastname: '',
             email: '',
-            birthdate: ''
+            birthdate: '',
+            gender: '',
+            showmygender: false,
+            showme: '',
+            lookingfor: '',
+            profilephotos: [],
+            passion: [],
+            sexualorientation: [],
         },
         validationSchema: SignupSchema,
-        onSubmit: (values: any) => {
-            console.log(values);
-            // Assuming validation passed, mark the current step as completed
-            const updatedCompletedSteps = [...completedSteps];
-            updatedCompletedSteps[currentStep] = true;
-            setCompletedSteps(updatedCompletedSteps);
-            // Move to the next step if not on the last step
-            if (currentStep < 3) {
-                setCurrentStep(currentStep + 1);
-            }
+        onSubmit: (values: CreateAccountType) => {
+            console.log(values, 'onsubmit')
         },
     });
 
@@ -56,44 +61,11 @@ const CreateAccountSteps = () => {
         }
     };
 
-    const [arePhotosUploaded, setArePhotosUploaded] = useState(false); // State variable to track photo upload status
-
-    const handlePhotosUploaded = () => {
-        setArePhotosUploaded(true);
-        handleStepClick(3)
-    };
-
-    const handleNextStep = () => {
-        // Check if all required fields are filled in the current step
-        if (formik.isValid && formik.dirty) {
-            formik.handleSubmit();
-            // setCurrentStep((prev) => prev + 1) // Submit the form if validation passes
-        } else {
-            const firstErrorField = Object.keys(formik.errors)[0];
-            if (firstErrorField) {
-                const errorElement = document.getElementsByName(firstErrorField)[0];
-                errorElement.scrollIntoView({ behavior: "smooth", block: "center" });
-
-                // Display error message below the input field
-                const errorMessage = formik.errors[firstErrorField as keyof typeof formik.errors];
-                const errorField = document.getElementById(`${firstErrorField}-error`);
-                if (errorField) {
-                    errorField.innerText = errorMessage as any;
-                }
-            }
-        }
-    };
-
     const handleNextClick = () => {
-        if (currentStep < 2) { handleNextStep(); }
-        if (arePhotosUploaded) {
-            handleNextStep();
-        } else if (currentStep === 2 && !arePhotosUploaded) {
-            const notify = () => toast.error("Please upload at least 2 photos.");
-            notify()
-        };
-    }
+        setCurrentStep((currentStep) => currentStep + 1);
+    };
 
+    console.log(formik.values)
     return (
         <div>
             <div className='container mx-auto mb-32 px-3 md:px-0'>
@@ -133,17 +105,17 @@ const CreateAccountSteps = () => {
                                 }
                                 {
                                     currentStep === 1 && (
-                                        <StepTwo handleStepClick={handleStepClick} />
+                                        <StepTwo handleStepClick={handleStepClick} formik={formik} />
                                     )
                                 }
                                 {
                                     currentStep === 2 && (
-                                        <StepThree handlePhotosUploaded={handlePhotosUploaded} />
+                                        <StepThree formik={formik} />
                                     )
                                 }
                                 {
                                     currentStep === 3 && (
-                                        <StepFour handleStepClick={handleStepClick} />
+                                        <StepFour formik={formik} />
                                     )
                                 }
                             </div>
@@ -163,7 +135,7 @@ const CreateAccountSteps = () => {
                             {
                                 IsSkipStep && <p className='text-primary cursor-pointer text-[18px] font-bold'>Skip Step</p>
                             }
-                            <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => { handleNextClick(); setIsRequiredField(true) }}>Next Step</button>
+                            <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => { handleNextClick() }}>Next Step</button>
 
                         </div>
                     </div>

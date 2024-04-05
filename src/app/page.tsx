@@ -4,13 +4,13 @@ import HomePage from '@/components/home'
 import Footer from '@/components/common/footer'
 import CreateAccountSteps from '@/components/createaccount'
 import LoginPage from './login/page'
-
+import AuthGuard from '@/hoc/Authguard'
 const Home = () => {
 
-  const [isHomePage, setIsHomePage] = useState<boolean>(false)
   return (
     <>
-      <LoginPage />
+      {/* <LoginPage /> */}
+      <CreateAccountSteps />
       {/* {
         isHomePage ?
           <>
@@ -23,4 +23,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default AuthGuard(Home)

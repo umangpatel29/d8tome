@@ -12,8 +12,6 @@ interface StepOneProps {
 }
 
 const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredField }) => {
-  console.log(isRequiredField, "isRequiredField")
-  console.log(formik.errors.email || "Required")
   return (
     <div>
       <div>
@@ -60,7 +58,7 @@ const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredFi
         <div>
           <p className='font-semibold text-[18px] leading-[20px]'>Birthday</p>
           <div className='mt-1'>
-            <BirthdatePicker />
+            <BirthdatePicker formik={formik} />
           </div>
         </div>
       </div>
