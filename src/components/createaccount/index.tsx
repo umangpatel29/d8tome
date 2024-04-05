@@ -31,7 +31,7 @@ const CreateAccountSteps = () => {
     const [isRequiredField, setIsRequiredField] = useState(false)
     const steps = [0, 1, 2, 3];
 
-    const [currentStep, setCurrentStep] = useState(2);
+    const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState([false, false, false, false]); // Array to track completed steps
 
     const formik = useFormik<CreateAccountType>({

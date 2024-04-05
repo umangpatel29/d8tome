@@ -73,7 +73,7 @@ const SexualOrientation = ({ modelIsOpen, setModelIsOpen, sexualOrientationData,
                 </div>
                 <div className='mx-auto'>
                     <div className='mt-8 w-full flex justify-center flex-col'>
-                        <h1 className='font-semibold text-6 leading-7 text-center'>Sexual Orientation</h1>
+                        <h1 className='font-semibold text-[20px] leading-7 text-center'>Sexual Orientation</h1>
                         <div className='font-normal text-[#808080] text-4 leading-5 text-center mt-3'>Let everyone know what you’re passionate about by adding it to your profile.</div>
                     </div>
                     <div className='flex h-[500px] custom-scroll overflow-y-scroll md:px-20 px-5 flex-wrap justify-center gap-3 mt-8'>

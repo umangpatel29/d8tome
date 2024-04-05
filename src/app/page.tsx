@@ -8,8 +8,8 @@ const Home = () => {
 
   return (
     <>
-      {/* <LoginPage /> */}
-      <CreateAccountSteps />
+      <LoginPage />
+      {/* <CreateAccountSteps /> */}
       {/* {
         isHomePage ?
           <>

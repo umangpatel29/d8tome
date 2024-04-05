@@ -11,6 +11,7 @@ import Welcome from "@/components/modals/Welcome";
 import useWindowSize from "@/hooks/useWindowSize";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isSignIn, setIsSignIn] = useState(false);
@@ -147,7 +148,11 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Sign In</button>
+          <div className="flex gap-5">
+            <Link href='/login' className="text-primary font-bold">go to login page</Link>
+            <Link href='/createaccount' className="text-primary font-bold">go to create account</Link>
+          </div>
+          {/* <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Sign In</button> */}
 
           <div className="flex justify-end items-center gap-5">
             <div className="h-5 w-5 cursor-pointer">

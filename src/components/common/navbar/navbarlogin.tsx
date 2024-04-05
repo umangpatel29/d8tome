@@ -11,6 +11,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import SignUp from "@/components/modals/SignUp";
+import Link from "next/link";
 
 const NavbarLogin = () => {
     const [isSignIn, setIsSignIn] = useState(false);
@@ -56,6 +57,13 @@ const NavbarLogin = () => {
 
                     </div>
                     <div className="flex gap-3">
+                        <Link href='/homepage'>
+                            <div className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-[#F13170]'>Go to Home Page</div>
+                        </Link>
+                        <Link href='/createaccount'>
+                            <div className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-[#F13170]'>Go to create account Page</div>
+                        </Link>
+
                         <button onClick={() => setIsSignIn(!isSignIn)} className='hidden md:flex px-6 py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-primary border border-primary'>Sign Up</button>
                         <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Log In</button>
                     </div>
@@ -151,7 +159,7 @@ const NavbarLogin = () => {
                 </div>
             )}
 
-            <SignUp forModal={isSignUp} setForModal={setIsSignUp} setIsPhoneNumber={setIsPhoneNumber} setIsEmailVerification={setIsEmailVerification} setIsSignIn={setIsSignIn}/>
+            <SignUp forModal={isSignUp} setForModal={setIsSignUp} setIsPhoneNumber={setIsPhoneNumber} setIsEmailVerification={setIsEmailVerification} setIsSignIn={setIsSignIn} />
             <SignIn forModal={isSignIn} setForModal={setIsSignIn} setIsPhoneNumber={setIsPhoneNumber} setIsSignUp={setIsSignUp} />
             {/* <Email forModal={isEmail} setForModal={setIsEmail} setIsVerifyEmail={setIsVerifyEmail} /> */}
             {/* <VerifyEmail forModal={isVerifyEmail} setForModal={setIsVerifyEmail} setIsEmail={setIsEmail} setIsEmailVerification={setIsEmailVerification} /> */}
