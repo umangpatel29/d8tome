@@ -3,9 +3,13 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import Modal from "react-modal";
 import VerifyEmail from './VerifyEmail';
+import { useUser } from '@/context/useContext';
+import { ToastContainer, toast } from 'react-toastify';
+import { VerifyPhone } from '@/services/http/verifyNumber';
+import Spinner from '../spinner/Spinner';
 
 type HeroVideoProps = {
-    forModal?: boolean;
+    forModal?: boolean | null;
     setForModal: (quantity: boolean) => void;
     setIsPricePlan: (quantity: boolean) => void;
 };
@@ -14,12 +18,24 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
     const [modalIsOpen, setIsOpen] = useState(false);
     const [verificationCode, setVerificationCode] = useState<string[]>(['', '', '', '', '', '']);
     const inputsRef = useRef<HTMLInputElement[]>([]);
+    const [otp, setOtp] = useState("")
+    const [isValidOtp, setIsValidOtp] = useState(false)
+    const { token, loader, setLoader, getPhoneOtp } = useUser()
 
     useEffect(() => {
         if (inputsRef.current[0]) {
             inputsRef.current[0].focus();
         }
     }, []);
+
+    useEffect(() => {
+        // Check if all fields are filled
+        const isAllFilled = verificationCode.every(code => code !== '');
+        if (isAllFilled) {
+            const otpValue = verificationCode.join(''); // Concatenate all digits
+            setOtp(otpValue); // Set otp state with the concatenated value
+        }
+    }, [verificationCode]);
 
     const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -46,6 +62,30 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
 
     const handleInputAndKeyDown = (index: number, event: React.KeyboardEvent<HTMLInputElement>) => {
         handleKeyDown(index, event);
+    };
+
+    const handleVerify = async () => {
+        const isAllFilled = verificationCode.every(code => code !== '');
+        setIsValidOtp(true);
+        setLoader(true)
+        if (isAllFilled) {
+            await VerifyPhone.ValidatePhone(
+                { otp }, token || ""
+            ).then((res) => {
+                setIsValidOtp(false);
+                closeModal();
+                setIsPricePlan(true)
+                setLoader(false)
+            }).catch((err) => {
+                setLoader(false)
+                setIsValidOtp(false);
+                console.log(err);
+            });
+        } else {
+            // Trigger toast if not all fields are filled
+            toast.error("Invalid otp");
+        }
+
     };
 
     const closeModal = () => {
@@ -154,14 +194,17 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
                             <div className='flex flex-col gap-[14px]'>
                                 <span className='font-Poppins font-medium text-[14px] leading-5 text-[#1E22FB]'>Update a contact info</span>
                                 <div className='flex flex-col gap-[10px]'>
-                                    <button onClick={() => { closeModal(); setIsPricePlan(true) }} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>Next</button>
-                                    <div className='w-full flex justify-end'><button onClick={() => { closeModal(); }} className='font-Poppins text-[#FF0080] bg-white py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[80px]'>Re-Send</button></div>
+                                    <button onClick={handleVerify} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>
+                                        {loader ? <Spinner /> : "Next"}
+                                    </button>
+                                    <div className='w-full flex justify-end'><button onClick={() => getPhoneOtp({ closeModal, token })} className='font-Poppins text-[#FF0080] bg-white py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[80px]'>Re-Send</button></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </Modal>
             </div>
+            <ToastContainer />
         </>
     )
 }

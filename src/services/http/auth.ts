@@ -1,4 +1,4 @@
-import { ApiResponseType, signInType, signUpType } from "@/types/data";
+import { ApiResponseType, UserType, loginType, signInType, signUpType } from "@/types/data";
 import http from "./index";
 
 type signInResType = {
@@ -7,11 +7,22 @@ type signInResType = {
 }
 
 export const Auth = {
-    signUp: async (data: signUpType) => {
+    signUp: async (data: signInType) => {
         return http
-            .post<ApiResponseType>("/register", data)
+            .post<ApiResponseType>("/user/register", data)
             .then((res) => res.data);
-    }
+    },
+
+    signIn: async (data: UserType) => {
+        return http
+            .post<ApiResponseType>("/user/login", data)
+            .then((res) => res.data);
+    },
+    LoginGoogle: async () => {
+        return http
+            .get<ApiResponseType>("/google")
+            .then((res) => res.data);
+    },
     //   signIn: async (data: signInType) => {
     //     return http
     //       .post<signInResType>("/login", data, { withCredentials: true })

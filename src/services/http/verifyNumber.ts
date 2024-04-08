@@ -1,29 +1,26 @@
+"use client"
 import { ApiResponseType, signInType, signUpType } from "@/types/data";
 import http from "./index";
+import { useEffect } from "react";
 
 type signInResType = {
     access_token: string;
     token_type: string;
 }
 
-let access_token: any;
-if (typeof localStorage !== "undefined") {
-    access_token = localStorage.getItem("access_token");
-}
-
-export const Verify = {
-    emailOtp: async () => {
+export const VerifyPhone = {
+    phoneOtp: async (data: any, token: string) => {
         return http
-            .get("/verifyEmail", {
-                headers: { Authorization : access_token },
+            .post<any>("/user/verifyPhoneNumber", data, {
+                headers: { Authorization: token },
                 withCredentials: true
             })
     },
-    ValidateEmail: async (data: any) => {
-        console.log(data,"data")
+    ValidatePhone: async (data: any, token: string) => {
+        console.log(data, "data")
         return http
-            .post("/validateemail", data, {
-                headers: { Authorization: access_token },
+            .post("/user/isPhoneNumberValid", data, {
+                headers: { Authorization: token },
                 withCredentials: true
             })
     }

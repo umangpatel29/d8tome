@@ -12,20 +12,15 @@ import useWindowSize from "@/hooks/useWindowSize";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/context/useContext";
 
 const Navbar = () => {
-  const [isSignIn, setIsSignIn] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [isEmail, setIsEmail] = useState(false);
-  const [isVerifyEmail, setIsVerifyEmail] = useState(false);
-  const [isEmailVerification, setIsEmailVerification] = useState(false)
-  const [isPhoneNumber, setIsPhoneNumber] = useState(false)
-  const [isPhoneNumberCode, setIsPhoneNumberCode] = useState(false)
-  const [isWelcome, setIsWelcome] = useState(false)
-  const [isPricePlanVisible, setIsPricePlanVisible] = useState(false);
+  const router = useRouter()
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { width } = useWindowSize();
+  const { setToken, setIsSpinner, setIsLogin } = useUser()
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -38,6 +33,14 @@ const Navbar = () => {
       setIsOpen(false);
     }
   }, [width]);
+
+  const handleLogout = () => {
+    setToken(localStorage.removeItem("USER_AUTH_TOKEN") as any)
+    setIsSpinner(true)
+    router.push("/")
+    setIsLogin(false)
+  }
+
   return (
     <>
       <div className="sticky top-0 border-b-2 bg-white py-5 z-[999]">
@@ -149,8 +152,9 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex gap-5">
-            <Link href='/login' className="text-primary font-bold">go to login page</Link>
+            {/* <Link href='/login' className="text-primary font-bold">go to login page</Link> */}
             <Link href='/createaccount' className="text-primary font-bold">go to create account</Link>
+            <button className="text-[#FF0080] font-medium" onClick={handleLogout}>Logout</button>
           </div>
           {/* <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Sign In</button> */}
 
@@ -286,17 +290,17 @@ const Navbar = () => {
       )}
 
 
-      <SignUp forModal={isSignUp} setForModal={setIsSignUp} setIsPhoneNumber={setIsPhoneNumber} setIsEmailVerification={setIsEmailVerification} setIsSignIn={setIsSignIn} />
+      {/* <SignUp forModal={isSignUp} setForModal={setIsSignUp} setIsPhoneNumber={setIsPhoneNumber} setIsEmailVerification={setIsEmailVerification} setIsSignIn={setIsSignIn} />
       <SignIn forModal={isSignIn} setForModal={setIsSignIn} setIsPhoneNumber={setIsPhoneNumber} setIsSignUp={setIsSignUp} />
       {/* <Email forModal={isEmail} setForModal={setIsEmail} setIsVerifyEmail={setIsVerifyEmail} /> */}
       {/* <VerifyEmail forModal={isVerifyEmail} setForModal={setIsVerifyEmail} setIsEmail={setIsEmail} setIsEmailVerification={setIsEmailVerification} /> */}
-      <EmailVerificationCode forModal={isEmailVerification} setForModal={setIsEmailVerification} setIsPhoneNumber={setIsPhoneNumber} />
+      {/* <EmailVerificationCode forModal={isEmailVerification} setForModal={setIsEmailVerification} setIsPhoneNumber={setIsPhoneNumber} />
       <LoginWithPhoneNumber forModal={isPhoneNumber} setForModal={setIsPhoneNumber} setIsPhoneNumberCode={setIsPhoneNumberCode} />
       <PhoneVerificationCode forModal={isPhoneNumberCode} setForModal={setIsPhoneNumberCode} setIsPricePlan={setIsPricePlanVisible} />
-      {isPricePlanVisible && (
-        <PricePlan setForModal={setIsPricePlanVisible} forModal={isPricePlanVisible} setIsWelcome={setIsWelcome} />
-      )}
-      <Welcome forModal={isWelcome} setForModal={setIsWelcome} />
+      {isPricePlanVisible && ( */}
+      {/* <PricePlan setForModal={setIsPricePlanVisible} forModal={isPricePlanVisible} setIsWelcome={setIsWelcome} />
+      )} */}
+      {/* <Welcome forModal={isWelcome} setForModal={setIsWelcome} /> */}
     </>
   );
 };

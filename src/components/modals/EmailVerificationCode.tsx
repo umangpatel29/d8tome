@@ -2,12 +2,13 @@
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import Modal from "react-modal";
-import { Verify } from '@/services/http/verify';
 import Spinner from '../spinner/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
+import { useUser } from '@/context/useContext';
+import { Verifyemail } from '@/services/http/verifyEmail';
 
 type HeroVideoProps = {
-    forModal?: boolean;
+    forModal?: boolean | null;
     setForModal: (quantity: boolean) => void;
     setIsPhoneNumber: (quantity: boolean) => void;
 };
@@ -18,17 +19,27 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
     const inputsRef = useRef<HTMLInputElement[]>([]);
     const [otp, setOtp] = useState("")
     const [isValidOtp, setIsValidOtp] = useState(false)
-
+    const { token, getOtp } = useUser()
+    console.log(token, "tokennnnnn")
     useEffect(() => {
         if (inputsRef.current[0]) {
             inputsRef.current[0].focus();
         }
     }, []);
 
+    useEffect(() => {
+        // Check if all fields are filled
+        const isAllFilled = verificationCode.every(code => code !== '');
+        if (isAllFilled) {
+            const otpValue = verificationCode.join(''); // Concatenate all digits
+            setOtp(otpValue); // Set otp state with the concatenated value
+        }
+    }, [verificationCode]);
+
     const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         // If this is the last input field, limit the value to a single digit
-        const newValue = index === 5 ? value.slice(0, 1) : value.slice(0, 1); // Limit value to single digit
+        const newValue = value.slice(0, 1); // Limit value to single digit
 
         setVerificationCode(prevCode => {
             const newCode = [...prevCode];
@@ -39,22 +50,15 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
         if (newValue && index < 5 && inputsRef.current[index + 1]) {
             inputsRef.current[index + 1].focus();
         }
-
-        // Check if all fields are filled
-        const isAllFilled = verificationCode.every(code => code !== '');
-        if (isAllFilled) {
-            const otpValue = verificationCode.join(''); // Concatenate all digits
-            setOtp(otpValue); // Set otp state with the concatenated value
-        }
     };
 
     const handleVerify = async () => {
         const isAllFilled = verificationCode.every(code => code !== '');
         setIsValidOtp(true);
         if (isAllFilled) {
-            await Verify.ValidateEmail({
-                otp
-            }).then((res) => {
+            await Verifyemail.ValidateEmail(
+                { otp }, token || ""
+            ).then((res) => {
                 setIsValidOtp(false);
                 closeModal();
                 setIsPhoneNumber(true);
@@ -67,7 +71,7 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
             toast.error("Invalid otp");
         }
 
-    }
+    };
 
     const handleKeyDown = (index: number, event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Backspace' && !verificationCode[index] && index > 0) {
@@ -175,7 +179,7 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
                                         isValidOtp ? <Spinner /> : "Next"
                                     }
                                 </button>
-                                <div className='w-full flex justify-end'><button onClick={() => { closeModal(); }} className='font-Poppins text-[#FF0080] bg-white py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[80px]'>Re-Send</button></div>
+                                <div className='w-full flex justify-end'><button onClick={() => getOtp(token as string)} className='font-Poppins text-[#FF0080] bg-white py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[80px]'>Re-Send</button></div>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,8 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import Modal from "react-modal";
 import Email from './Email';
+import { useUser } from '@/context/useContext';
+import Spinner from '../spinner/Spinner';
 
 type HeroVideoProps = {
     forModal?: boolean;
@@ -14,6 +16,7 @@ type HeroVideoProps = {
 const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false)
+    const { signin, email, setIsEmail, password, setPassword, loader, SignInWithGoogle } = useUser()
     const closeModal = () => {
         setIsOpen(false);
         setForModal(false);
@@ -85,8 +88,8 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
                                 <span onClick={() => { closeModal(); setIsSignUp(true) }} className='font-Poppins font-medium text-[14px] cursor-pointer leading-[20px] text-[#1E22FB]'>I don&apos;t have an account</span>
                             </div>
                             <div className='flex flex-col gap-3'>
-                                <input type="text" placeholder='Email' className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
-                                <input type="password" placeholder='Password' className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
+                                <input type="text" placeholder='Email' value={email} onChange={(e) => setIsEmail(e.target.value)} className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
+                                <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} className='w-[384px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[10px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[12px]' />
                                 <p className='font-Poppins font-normal text-[12px] leading-5 text-[#374151]'>
                                     By signing up, you agree to the
                                     <span className='font-Poppins font-medium underline text-[12px] mx-1 leading-5 text-[#374151]'>
@@ -98,7 +101,9 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
                                 </p>
                             </div>
                             <div className='flex flex-col gap-5'>
-                                <button onClick={() => { closeModal(); }} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>Agree and Sign in</button>
+                                <button onClick={() => { signin({ email, password, closeModal }) }} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>
+                                    {loader ? <Spinner /> : "Agree and Sign in"}
+                                </button>
                                 <span className='border-t-[1px] border-[#6B7280] relative'>
                                     <span className='absolute bg-white px-[7px] font-Poppins text-[#6B7280] font-semibold text-[14px] leading-5 tracking-[0.3px] top-[-11px] left-[33%]'>or sign up with</span>
                                 </span>
@@ -116,7 +121,7 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
                                                 />
                                                 <span className='font-inter font-medium text-[16px] leading-7'>Log in with Facebook</span>
                                             </div>
-                                            <div className='flex gap-8 py-[14px] pl-[24px] border-[1px] rounded-[6px] boder-[#D1D5DB] cursor-pointer'>
+                                            <div onClick={SignInWithGoogle} className='flex gap-8 py-[14px] pl-[24px] border-[1px] rounded-[6px] boder-[#D1D5DB] cursor-pointer'>
                                                 <Image
                                                     src="/svg/google.svg"
                                                     alt="logo"

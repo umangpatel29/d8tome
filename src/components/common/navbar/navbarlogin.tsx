@@ -12,18 +12,19 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import SignUp from "@/components/modals/SignUp";
 import Link from "next/link";
+import { useUser } from "@/context/useContext";
 
 const NavbarLogin = () => {
     const [isSignIn, setIsSignIn] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
-    const [isEmailVerification, setIsEmailVerification] = useState(false)
     const [isPhoneNumber, setIsPhoneNumber] = useState(false)
-    const [isPhoneNumberCode, setIsPhoneNumberCode] = useState(false)
     const [isWelcome, setIsWelcome] = useState(false)
     const [isPricePlanVisible, setIsPricePlanVisible] = useState(false);
+    const { isEmailVerification, setIsEmailVerification } = useUser()
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { width } = useWindowSize();
+    const { isPhoneNumberCode, setIsPhoneNumberCode } = useUser()
 
     useEffect(() => {
         if (isOpen) {
@@ -159,12 +160,12 @@ const NavbarLogin = () => {
                 </div>
             )}
 
-            <SignUp forModal={isSignUp} setForModal={setIsSignUp} setIsPhoneNumber={setIsPhoneNumber} setIsEmailVerification={setIsEmailVerification} setIsSignIn={setIsSignIn} />
+            <SignUp forModal={isSignUp} setForModal={setIsSignUp} setIsPhoneNumber={setIsPhoneNumber} setIsSignIn={setIsSignIn} />
             <SignIn forModal={isSignIn} setForModal={setIsSignIn} setIsPhoneNumber={setIsPhoneNumber} setIsSignUp={setIsSignUp} />
             {/* <Email forModal={isEmail} setForModal={setIsEmail} setIsVerifyEmail={setIsVerifyEmail} /> */}
             {/* <VerifyEmail forModal={isVerifyEmail} setForModal={setIsVerifyEmail} setIsEmail={setIsEmail} setIsEmailVerification={setIsEmailVerification} /> */}
             <EmailVerificationCode forModal={isEmailVerification} setForModal={setIsEmailVerification} setIsPhoneNumber={setIsPhoneNumber} />
-            <LoginWithPhoneNumber forModal={isPhoneNumber} setForModal={setIsPhoneNumber} setIsPhoneNumberCode={setIsPhoneNumberCode} />
+            <LoginWithPhoneNumber forModal={isPhoneNumber} setForModal={setIsPhoneNumber} />
             <PhoneVerificationCode forModal={isPhoneNumberCode} setForModal={setIsPhoneNumberCode} setIsPricePlan={setIsPricePlanVisible} />
             {isPricePlanVisible && (
                 <PricePlan setForModal={setIsPricePlanVisible} forModal={isPricePlanVisible} setIsWelcome={setIsWelcome} />

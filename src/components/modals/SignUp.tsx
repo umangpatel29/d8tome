@@ -1,6 +1,5 @@
 "use client"
 import { Auth } from '@/services/http/auth';
-import { Verify } from '@/services/http/verify';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -8,23 +7,21 @@ import Modal from "react-modal";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from '../spinner/Spinner';
+import { useUser } from '@/context/useContext';
 
 type HeroVideoProps = {
     forModal?: boolean;
     setForModal: (quantity: boolean) => void;
-    setIsEmailVerification: (quantity: boolean) => void;
     setIsPhoneNumber: (quantity: boolean) => void;
     setIsSignIn: (quantity: boolean) => void;
 };
 
-const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumber, setIsSignIn }: HeroVideoProps) => {
+const SignUp = ({ setForModal, forModal, setIsPhoneNumber, setIsSignIn }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false)
-    const [email, setIsEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [isSpinner, setIsSpinner] = useState(false)
     const router = useRouter();
+    const { signup, loader, setLoader, isEmailVerification, setIsEmailVerification, password, email, confirmPassword, setPassword, setIsEmail, setConfirmPassword } = useUser()
+
     const closeModal = () => {
         setIsOpen(false);
         setForModal(false);
@@ -37,39 +34,18 @@ const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumbe
     };
 
     const checkPassword = () => {
-        if ((password !== confirmPassword) && (password.length > 1)) {
+        if ((password !== confirmPassword) && (password?.length > 1)) {
             const notify = () => toast.error("confirm password does not match");
             notify()
             setPassword("")
             setConfirmPassword("")
             setIsEmailVerification(false);
-        } else {
-            setPassword("")
-            setConfirmPassword("")
-            setIsEmail("")
         }
     }
 
-    const handleSignUp = async () => {
-        setIsSpinner(true)
-        await Auth.signUp({
-            email,
-            password,
-            confirmPassword,
-        }).then((res) => {
-            localStorage.setItem('access_token', res.data.accessToken)
-            closeModal()
-            setIsEmailVerification(true);
-            setIsSpinner(false)
-        }).catch((err) => {
-            setIsSpinner(false)
-            console.log(err)
-        })
-        Verify.emailOtp().then(() => {
-            console.log("heel")
-        }).catch((err) => {
-            console.log(err)
-        })
+    const handleSignUp = () => {
+        checkPassword()
+        signup({ email, password, confirmPassword, closeModal })
     };
 
 
@@ -147,9 +123,9 @@ const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumbe
                                 </p>
                             </div>
                             <div className='flex flex-col gap-5'>
-                                <button onClick={() => { checkPassword(); handleSignUp() }} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>
+                                <button onClick={handleSignUp} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>
                                     {
-                                        isSpinner ? <Spinner /> : "Agree and Sign up"
+                                        loader ? <Spinner /> : "Agree and Sign up"
                                     }
                                 </button>
                                 <span className='border-t-[1px] border-[#6B7280] relative'>
@@ -201,8 +177,8 @@ const SignUp = ({ setForModal, forModal, setIsEmailVerification, setIsPhoneNumbe
                             </div>
                         </div>
                     </div>
-                </Modal>
-            </div>
+                </Modal >
+            </div >
             <ToastContainer />
             {/* <Email forModal={play} setForModal={setPlay} /> */}
         </>
