@@ -34,6 +34,10 @@ export type UserProvide = {
     isLogin: boolean | null
     setIsLogin: (val: boolean) => void
     SignInWithGoogle: () => void
+    activeIndex: number | null
+    setActiveIndex: (val: number) => void
+    activeDiv: number | null
+    setActiveDiv: (val: number | null) => void
 };
 
 export type UserProviderProps = {
@@ -61,6 +65,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const [isPhoneNumberCode, setIsPhoneNumberCode] = useState(false)
     const [isSpinner, setIsSpinner] = useState(false)
     const [isLogin, setIsLogin] = useState(false)
+    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeDiv, setActiveDiv] = useState<number | null>(null);
 
     const getOtp = (access_token: any) => {
         console.log(access_token, "tokennnnnn")
@@ -68,7 +74,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             console.log("heel")
         }).catch((err: any) => {
             console.log(err)
-        })
+        }).finally(() => setLoader(false))
     }
 
     const SignInWithGoogle = () => {
@@ -86,10 +92,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             console.log("heel")
             closeModal()
             setIsPhoneNumberCode(true)
-            setLoader(false)
         }).catch((err: any) => {
             console.log(err)
-        });
+        }).finally(()=>setLoader(false))
     };
 
     const signin = ({ email, password, closeModal }: loginType) => {
@@ -99,7 +104,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             password
         }).then((res) => {
             setToken(res?.data?.accessToken)
-            localStorage.setItem(USER_AUTH_TOKEN, res?.data?.accessToken)
+            localStorage.setItem("access_token", res?.data?.accessToken)
             closeModal()
             setIsLogin(true)
             setLoader(false)
@@ -121,7 +126,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             password,
             confirmPassword,
         }).then((res) => {
-            console.log(res.data.accessToken, "token")
             localStorage.setItem(USER_AUTH_TOKEN, res?.data?.accessToken)
             setToken(res?.data?.accessToken)
             // setCookie(USER_AUTH_TOKEN, res.access_token, {
@@ -157,6 +161,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ signup, loader, setLoader, getOtp, isEmailVerification, setIsEmailVerification, token, password, setPassword, email, setIsEmail, confirmPassword, setConfirmPassword, phoneNumber, setPhoneNumber, isPhoneNumberCode, setIsPhoneNumberCode, getPhoneOtp, signin, setToken, isSpinner, setIsSpinner, isLogin, setIsLogin, SignInWithGoogle }}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{ signup, loader, setLoader, getOtp, isEmailVerification, setIsEmailVerification, token, password, setPassword, email, setIsEmail, confirmPassword, setConfirmPassword, phoneNumber, setPhoneNumber, isPhoneNumberCode, setIsPhoneNumberCode, getPhoneOtp, signin, setToken, isSpinner, setIsSpinner, isLogin, setIsLogin, SignInWithGoogle, activeIndex, setActiveIndex, activeDiv, setActiveDiv }}>{children}</UserContext.Provider>
     )
 }

@@ -1,6 +1,5 @@
-"use client"
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import Modal from "react-modal";
 import VerifyEmail from './VerifyEmail';
 import { useUser } from '@/context/useContext';
@@ -17,6 +16,7 @@ type HeroVideoProps = {
 const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [verificationCode, setVerificationCode] = useState<string[]>(['', '', '', '', '', '']);
+    const [activeInput, setActiveInput] = useState<number | null>(null); // Track active input index
     const inputsRef = useRef<HTMLInputElement[]>([]);
     const [otp, setOtp] = useState("")
     const [isValidOtp, setIsValidOtp] = useState(false)
@@ -50,6 +50,9 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
 
         if (newValue && index < 5 && inputsRef.current[index + 1]) {
             inputsRef.current[index + 1].focus();
+        }
+        if (!newValue && index > 0 && inputsRef.current[index - 1]) {
+            inputsRef.current[index - 1].focus();
         }
     };
 
@@ -107,6 +110,7 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
             closeModal();
         }
     }, [forModal]);
+
     return (
         <>
             <div className=''>
@@ -172,7 +176,9 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
                                         value={digit}
                                         onChange={event => { handleInputChange(index, event) }}
                                         onKeyDown={event => handleInputAndKeyDown(index, event)}
-                                        className='w-[54px] h-[60px] text-[#9CA3AF] rounded-[8px] border-[1px] text-center text-[30px] border-[#9CA3AF]'
+                                        onFocus={() => setActiveInput(index)} // Set active input index
+                                        onBlur={() => setActiveInput(null)} // Reset active input index
+                                        className={`w-[54px] h-[60px] text-[#9CA3AF] rounded-[8px] border-[1px] text-center text-[30px] border-[#9CA3AF] ${activeInput === index ? 'bg-[#e0e3e5]' : ''}`}
                                     />
                                 ))}
                             </div>
@@ -194,7 +200,7 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
                             <div className='flex flex-col gap-[14px]'>
                                 <span className='font-Poppins font-medium text-[14px] leading-5 text-[#1E22FB]'>Update a contact info</span>
                                 <div className='flex flex-col gap-[10px]'>
-                                    <button onClick={handleVerify} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>
+                                    <button onClick={handleVerify} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full'>
                                         {loader ? <Spinner /> : "Next"}
                                     </button>
                                     <div className='w-full flex justify-end'><button onClick={() => getPhoneOtp({ closeModal, token })} className='font-Poppins text-[#FF0080] bg-white py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[80px]'>Re-Send</button></div>
@@ -209,4 +215,4 @@ const PhoneVerificationCode = ({ setForModal, forModal, setIsPricePlan }: HeroVi
     )
 }
 
-export default PhoneVerificationCode
+export default PhoneVerificationCode;

@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import Email from './Email';
 import { useUser } from '@/context/useContext';
 import Spinner from '../spinner/Spinner';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 type HeroVideoProps = {
     forModal?: boolean;
@@ -16,7 +17,7 @@ type HeroVideoProps = {
 const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false)
-    const { signin, email, setIsEmail, password, setPassword, loader, SignInWithGoogle } = useUser()
+    const { signin, email, setIsEmail, password, setPassword, loader } = useUser()
     const closeModal = () => {
         setIsOpen(false);
         setForModal(false);
@@ -26,6 +27,13 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
         setIsOpen(true);
         setForModal(true);
         document.body.style.overflow = "hidden";
+    };
+
+    const googleAuth = () => {
+        window.open(
+            `https://d8teme-752t.onrender.com/api/v1/google/callback`,
+            "_self"
+        );
     };
 
     useEffect(() => {
@@ -121,7 +129,7 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
                                                 />
                                                 <span className='font-inter font-medium text-[16px] leading-7'>Log in with Facebook</span>
                                             </div>
-                                            <div onClick={SignInWithGoogle} className='flex gap-8 py-[14px] pl-[24px] border-[1px] rounded-[6px] boder-[#D1D5DB] cursor-pointer'>
+                                            <div onClick={googleAuth} className='flex gap-8 py-[14px] pl-[24px] border-[1px] rounded-[6px] boder-[#D1D5DB] cursor-pointer'>
                                                 <Image
                                                     src="/svg/google.svg"
                                                     alt="logo"

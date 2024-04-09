@@ -1,5 +1,6 @@
 import { ApiResponseType, UserType, loginType, signInType, signUpType } from "@/types/data";
 import http from "./index";
+import { headers } from "next/headers";
 
 type signInResType = {
     access_token: string;
@@ -20,7 +21,9 @@ export const Auth = {
     },
     LoginGoogle: async () => {
         return http
-            .get<ApiResponseType>("/google")
+            .get<signInResType>("/google/callback", {
+                withCredentials: true
+            })
             .then((res) => res.data);
     },
     //   signIn: async (data: signInType) => {

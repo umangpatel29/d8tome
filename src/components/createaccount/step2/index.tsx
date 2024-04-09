@@ -1,7 +1,11 @@
 "use client"
 
+import Relationship from '@/components/modals/Relationship';
+import { relationshipData } from '@/constant/data';
+import { useUser } from '@/context/useContext';
 import { CreateAccountType } from '@/types/createaccounttype/createaccounttype';
 import { FormikProps } from 'formik';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 
 interface StepOneProps {
@@ -12,10 +16,12 @@ interface StepOneProps {
 const StepTwo = ({ handleStepClick, formik }: StepOneProps) => {
 
     const { values, setFieldValue } = formik;
+    const { activeIndex, setActiveIndex, activeDiv, setActiveDiv } = useUser()
 
     const [isGender, setIsGender] = useState('men')
+    const [isRelationShip, setIsRelationShip] = useState(false)
     const [showMe, setShowMe] = useState('women')
-
+    
     useEffect(() => {
         setFieldValue('gender', isGender);
         setFieldValue('showme', showMe);
@@ -57,12 +63,35 @@ const StepTwo = ({ handleStepClick, formik }: StepOneProps) => {
                         <div onClick={() => setShowMe('other')} className={`${showMe === 'other' ? 'bg-[#ffdbed] text-primary' : ' border border-[#CDCDCD] text-[#CDCDCD]'}  text-[18px] w-full py-4 rounded-full font-medium leading-[20px]  text-center cursor-pointer`}>Other</div>
                     </div>
                 </div>
-                <div>
+                <div >
                     <p className='text-[18px] font-semibold leading-[20px] text-[#3A3A3A]'>Looking for</p>
-                    <div className='flex items-center gap-5 justify-between mt-2'>
+                    <div onClick={() => setIsRelationShip(true)} className='flex items-center gap-5 justify-between mt-2'>
                         <div className='border border-[#CDCDCD] text-[#CDCDCD] text-[18px] px-5 py-4 rounded-full font-medium leading-[20px]  text-center cursor-pointer'> + Add Relationship intent</div>
                     </div>
                 </div>
+            </div>
+            <Relationship forModal={isRelationShip} setForModal={setIsRelationShip} />
+            <div className={`mt-7`}>
+                {
+                    relationshipData.map((data, index) => {
+                        return (
+                            <>
+                                <div className={`${activeDiv == index ? "block border-2 border-[#FF0080] bg-white" : "bg-[#f0f2f4] hidden"} px-5 flex rounded-[32px] items-center gap-2 p-2 w-fit`}>
+                                    <div>
+                                        <Image
+                                            src={data.icon}
+                                            alt="close"
+                                            width={25}
+                                            height={25}
+                                            className=""
+                                        />
+                                    </div>
+                                    <span className='font-Poppins font-normal text-[16px] leading-5 text-center text-[#808080]'>{data.title}</span>
+                                </div>
+                            </>
+                        )
+                    })
+                }
             </div>
         </div>
     )

@@ -26,7 +26,11 @@ export const UserContext = createContext<UserProvide>({
     setIsSpinner: () => { },
     isLogin: null,
     setIsLogin: () => { },
-    SignInWithGoogle: () => { }
+    SignInWithGoogle: () => { },
+    activeIndex: null,
+    setActiveIndex: () => { },
+    activeDiv: null,
+    setActiveDiv: () => { }
 })
 
 export const useUser = () => {

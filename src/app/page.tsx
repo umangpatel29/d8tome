@@ -8,17 +8,16 @@ import { useUser } from '@/context/useContext'
 import Navbar from '@/components/common/navbar'
 const Home = () => {
 
-  const { token, isSpinner, setIsSpinner, isLogin, setIsLogin } = useUser()
-  console.log(token, "token")
-
-  useEffect(()=>{
-    setIsLogin(true)
-  },[])
+  const { isSpinner, setIsSpinner, isLogin, setIsLogin } = useUser()
+  let token
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('access_token')
+  }
 
   return (
     <>
       {
-        (isLogin && token) ?
+        (token) ?
           <div>
             <Navbar />
             <HomePage />

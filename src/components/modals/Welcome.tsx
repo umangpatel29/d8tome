@@ -11,6 +11,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useUser } from '@/context/useContext';
+import { useRouter } from 'next/navigation';
 
 type HeroVideoProps = {
     forModal?: boolean;
@@ -22,6 +23,7 @@ const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const { isLogin, setIsLogin } = useUser()
+    const router = useRouter()
 
     const closeModal = () => {
         setIsOpen(false);
@@ -37,9 +39,7 @@ const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
     const handleSwiper = () => {
         if (activeIndex < WelcomeData.length - 1)
             setActiveIndex(activeIndex + 1)
-        if (activeIndex === WelcomeData.length - 1) { closeModal(); setIsLogin(true) }
-
-
+        if (activeIndex === WelcomeData.length - 1) { closeModal(); router.push('/createaccount') }
         swiper?.slideNext()
     }
 

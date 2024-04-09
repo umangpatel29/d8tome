@@ -1,13 +1,4 @@
 "use client"
-import Email from "@/components/modals/Email";
-import EmailVerificationCode from "@/components/modals/EmailVerificationCode";
-import LoginWithPhoneNumber from "@/components/modals/LoginWithPhoneNumber";
-import PhoneVerificationCode from "@/components/modals/PhoneVerificationCode";
-import PricePlan from "@/components/modals/PricePlan";
-import SignUp from "@/components/modals/SignUp";
-import SignIn from "@/components/modals/SignIn";
-import VerifyEmail from "@/components/modals/VerifyEmail";
-import Welcome from "@/components/modals/Welcome";
 import useWindowSize from "@/hooks/useWindowSize";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -21,6 +12,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { width } = useWindowSize();
   const { setToken, setIsSpinner, setIsLogin } = useUser()
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -28,6 +20,7 @@ const Navbar = () => {
       document.body.style.overflow = "unset";
     }
   }, [isOpen]);
+
   useEffect(() => {
     if (width > 768) {
       setIsOpen(false);
@@ -35,7 +28,8 @@ const Navbar = () => {
   }, [width]);
 
   const handleLogout = () => {
-    setToken(localStorage.removeItem("USER_AUTH_TOKEN") as any)
+    localStorage.removeItem("USER_AUTH_TOKEN")
+    localStorage.removeItem('access_token')
     setIsSpinner(true)
     router.push("/")
     setIsLogin(false)

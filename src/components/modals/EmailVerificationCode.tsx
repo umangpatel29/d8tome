@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import Modal from "react-modal";
@@ -16,11 +15,12 @@ type HeroVideoProps = {
 const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [verificationCode, setVerificationCode] = useState<string[]>(['', '', '', '', '', '']);
+    const [activeInput, setActiveInput] = useState<number | null>(null); // Track active input index
     const inputsRef = useRef<HTMLInputElement[]>([]);
     const [otp, setOtp] = useState("")
     const [isValidOtp, setIsValidOtp] = useState(false)
     const { token, getOtp } = useUser()
-    console.log(token, "tokennnnnn")
+
     useEffect(() => {
         if (inputsRef.current[0]) {
             inputsRef.current[0].focus();
@@ -39,7 +39,7 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
     const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         // If this is the last input field, limit the value to a single digit
-        const newValue = value.slice(0, 1); // Limit value to single digit
+        const newValue = index === 5 ? value.slice(0, 1) : value.slice(0, 1); // Limit value to single digit
 
         setVerificationCode(prevCode => {
             const newCode = [...prevCode];
@@ -49,6 +49,10 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
 
         if (newValue && index < 5 && inputsRef.current[index + 1]) {
             inputsRef.current[index + 1].focus();
+        }
+
+        if (!newValue && index > 0 && inputsRef.current[index - 1]) {
+            inputsRef.current[index - 1].focus();
         }
     };
 
@@ -103,7 +107,7 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
             closeModal();
         }
     }, [forModal]);
-    console.log(otp)
+
     return (
         <>
             <div className=''>
@@ -169,7 +173,9 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
                                         value={digit}
                                         onChange={(event) => { handleInputChange(index, event) }}
                                         onKeyDown={event => handleInputAndKeyDown(index, event)}
-                                        className='w-[54px] h-[60px] text-[#9CA3AF] rounded-[8px] border-[1px] text-center text-[30px] border-[#9CA3AF]'
+                                        onFocus={() => setActiveInput(index)} // Set active input index
+                                        onBlur={() => setActiveInput(null)} // Reset active input index
+                                        className={`w-[54px] h-[60px] text-[#9CA3AF] rounded-[8px] border-[1px] text-center text-[30px] border-[#9CA3AF] ${activeInput === index ? 'bg-[#e0e3e5]' : ''}`}
                                     />
                                 ))}
                             </div>

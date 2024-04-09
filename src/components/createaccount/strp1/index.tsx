@@ -4,6 +4,7 @@ import { CreateAccountType } from '@/types/createaccounttype/createaccounttype'
 import { FormikProps } from 'formik'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useUser } from '@/context/useContext';
 
 interface StepOneProps {
   formik: FormikProps<CreateAccountType>;
@@ -12,6 +13,9 @@ interface StepOneProps {
 }
 
 const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredField }) => {
+
+  const { email } = useUser()
+  console.log(email)
   return (
     <div>
       <div>
@@ -50,7 +54,7 @@ const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredFi
             <input type="email" name='email' placeholder='email' className='py-3 rounded-md  border w-full px-3'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.email}
+              value={email}
             />
           </div>
           {(isRequiredField && (formik.errors.email || !formik.values.email)) && <div className='text-red-500 text-sm'>{formik.errors.email || "Required"}</div>}
