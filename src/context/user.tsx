@@ -92,9 +92,11 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             console.log("heel")
             closeModal()
             setIsPhoneNumberCode(true)
+            setPhoneNumber("")
         }).catch((err: any) => {
             console.log(err)
-        }).finally(()=>setLoader(false))
+            setPhoneNumber("")
+        }).finally(() => setLoader(false))
     };
 
     const signin = ({ email, password, closeModal }: loginType) => {
