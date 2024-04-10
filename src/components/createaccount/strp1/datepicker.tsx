@@ -55,9 +55,9 @@ const BirthdatePicker: React.FC<formikvaluesType> = ({ formik }) => {
     }, []);
 
     useEffect(() => {
-        if (formik.values.birthdate !== '') {
-            const birthdate = formik.values.birthdate;
-            const dateObject = new Date(birthdate);
+        if (formik.values.DOB !== '') {
+            const DOB = formik.values.DOB;
+            const dateObject = new Date(DOB);
             const day = dateObject.getUTCDate().toString().padStart(2, '0');
             const month = (dateObject.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are zero-based, so we add 1
             const year = dateObject.getUTCFullYear().toString();
@@ -66,14 +66,14 @@ const BirthdatePicker: React.FC<formikvaluesType> = ({ formik }) => {
             setMonth(month);
             setYear(year);
         }
-    }, [formik.values.birthdate]);
+    }, [formik.values.DOB]);
 
     useEffect(() => {
         if (year !== '0' && month !== '0' && day !== '0') {
             const currentDate = new Date();
             const time = `${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}.${currentDate.getMilliseconds().toString().padStart(3, '0')}`;
             const dateTime = `${year}-${month}-${day}T${time}Z`;
-            formik.setFieldValue('birthdate', dateTime)
+            formik.setFieldValue('DOB', dateTime)
         }
         setShowYearDropdown(false);
         setShowMonthDropdown(false);

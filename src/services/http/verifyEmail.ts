@@ -11,7 +11,7 @@ type signInResType = {
 export const Verifyemail = {
     emailOtp: async (access_token: string) => {
         return http
-            .get<any>("/user/verifyEmail", {
+            .get<any>("/v1/user/verifyEmail", {
                 headers: { Authorization: access_token },
                 withCredentials: true
             })
@@ -19,7 +19,7 @@ export const Verifyemail = {
     ValidateEmail: async (data: any, token: string) => {
         console.log(data, "data")
         return http
-            .post("/user/validateemail", data, {
+            .post("/v1/user/validateemail", data, {
                 headers: { Authorization: token },
                 withCredentials: true
             })

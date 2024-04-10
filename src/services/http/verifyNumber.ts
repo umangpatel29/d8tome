@@ -11,7 +11,7 @@ type signInResType = {
 export const VerifyPhone = {
     phoneOtp: async (data: any, token: string) => {
         return http
-            .post<any>("/user/verifyPhoneNumber", data, {
+            .post<any>("/v1/user/verifyPhoneNumber", data, {
                 headers: { Authorization: token },
                 withCredentials: true
             })
@@ -19,7 +19,7 @@ export const VerifyPhone = {
     ValidatePhone: async (data: any, token: string) => {
         console.log(data, "data")
         return http
-            .post("/user/isPhoneNumberValid", data, {
+            .post("/v1/user/isPhoneNumberValid", data, {
                 headers: { Authorization: token },
                 withCredentials: true
             })

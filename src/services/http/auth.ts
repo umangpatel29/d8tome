@@ -10,18 +10,18 @@ type signInResType = {
 export const Auth = {
     signUp: async (data: signInType) => {
         return http
-            .post<ApiResponseType>("/user/register", data)
+            .post<ApiResponseType>("/v1/user/register", data)
             .then((res) => res.data);
     },
 
     signIn: async (data: UserType) => {
         return http
-            .post<ApiResponseType>("/user/login", data)
+            .post<ApiResponseType>("/v1/user/login", data)
             .then((res) => res.data);
     },
     LoginGoogle: async () => {
         return http
-            .get<signInResType>("/google/callback", {
+            .get<signInResType>("/v1/google", {
                 withCredentials: true
             })
             .then((res) => res.data);

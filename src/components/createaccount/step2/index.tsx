@@ -21,10 +21,10 @@ const StepTwo = ({ handleStepClick, formik }: StepOneProps) => {
     const [isGender, setIsGender] = useState('men')
     const [isRelationShip, setIsRelationShip] = useState(false)
     const [showMe, setShowMe] = useState('women')
-    
+
     useEffect(() => {
         setFieldValue('gender', isGender);
-        setFieldValue('showme', showMe);
+        setFieldValue('show_me', showMe);
     }, [isGender, showMe])
 
     return (
@@ -46,9 +46,9 @@ const StepTwo = ({ handleStepClick, formik }: StepOneProps) => {
                         <input
                             type="checkbox"
                             id='isShowOnProfile'
-                            checked={values.showmygender}
+                            checked={values.show_gender}
                             name='isShowOnProfile'
-                            onChange={() => setFieldValue('showmygender', !values.showmygender)}
+                            onChange={() => setFieldValue('show_gender', !values.show_gender)}
                             className='cursor-pointer accent-[#ee4198] h-4 w-4'
                         />
 
@@ -70,7 +70,7 @@ const StepTwo = ({ handleStepClick, formik }: StepOneProps) => {
                     </div>
                 </div>
             </div>
-            <Relationship forModal={isRelationShip} setForModal={setIsRelationShip} />
+            <Relationship forModal={isRelationShip} setForModal={setIsRelationShip} formik={formik}/>
             <div className={`mt-7`}>
                 {
                     relationshipData.map((data, index) => {

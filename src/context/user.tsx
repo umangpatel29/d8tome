@@ -85,10 +85,14 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         })
     }
 
+    console.log(phoneNumber, "phone number")
+
     const getPhoneOtp = ({ token, closeModal }: validOtpType) => {
         setLoader(true)
         const formattedPhoneNumber = "+91" + phoneNumber;
-        VerifyPhone.phoneOtp({ phone: formattedPhoneNumber }, token || "").then(() => {
+        let phonenumber = localStorage.getItem('phoneNumber')
+        if (!phonenumber) localStorage.setItem('phoneNumber', formattedPhoneNumber)
+        VerifyPhone.phoneOtp({ phone: localStorage.getItem('phoneNumber') }, token || "").then(() => {
             console.log("heel")
             closeModal()
             setIsPhoneNumberCode(true)
@@ -129,6 +133,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             confirmPassword,
         }).then((res) => {
             localStorage.setItem(USER_AUTH_TOKEN, res?.data?.accessToken)
+            localStorage.setItem("email", email)
             setToken(res?.data?.accessToken)
             // setCookie(USER_AUTH_TOKEN, res.access_token, {
             //     maxAge: 60 * 60 * 24 * 36500, // 100 years

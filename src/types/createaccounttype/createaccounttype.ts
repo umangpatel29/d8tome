@@ -2,12 +2,12 @@ export interface CreateAccountType {
     firstname: string;
     lastname: string;
     email: string;
-    birthdate: string;
-    profilephotos: string[];
+    DOB: string;
+    profileImage: string[];
     lookingfor: string;
-    showme: string;
-    showmygender: boolean;
+    show_me: string;
+    show_gender: boolean;
     gender: string;
-    passion: string[];
-    sexualorientation: string[];
+    passion?: string[];
+    sexualorientation?: string[];
 }

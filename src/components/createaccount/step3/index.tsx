@@ -39,6 +39,8 @@ const StepThree = ({ formik }: StepOneProps) => {
                 }
                 return newState;
             });
+            console.log(acceptedFiles, "acceptedFiles")
+            setFieldValue("profileImage", acceptedFiles);
         }
     };
 
@@ -50,21 +52,27 @@ const StepThree = ({ formik }: StepOneProps) => {
         });
     };
 
-    useEffect(() => {
-        const storedData = localStorage.getItem('profilephotos');
-        if (storedData) {
-            const parsedData = JSON.parse(storedData);
-            if (parsedData.length > 0) {
-                setFileStates(parsedData);
-            }
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedData = localStorage.getItem('profileImage');
+    //     if (storedData) {
+    //         const parsedData = JSON.parse(storedData);
+    //         if (parsedData.length > 0) {
+    //             setFileStates(parsedData);
+    //         }
+    //     }
+    // }, []);
 
     useEffect(() => {
-        const newArray = fileStates.filter(item => Array.isArray(item) && item.length > 0);
-        localStorage.setItem('profilephotos', JSON.stringify(newArray));
-        setFieldValue('profilephotos', newArray);
-    }, [fileStates]);
+        // Serialize Formik values including file data
+        const formValues = {
+            ...values, // Assuming other form values are stored in 'values' object
+            profilePhotos: fileStates.map((photos) => photos.map(({ file }) => file)) // Extracting file objects from fileStates
+        };
+
+        // Now, you can send 'formValues' in your API request
+        console.log("Form values with file data:", formValues);
+    }, [fileStates, values]);
+
 
 
     return (

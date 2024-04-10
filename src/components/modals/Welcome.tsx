@@ -51,7 +51,6 @@ const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
             closeModal();
         }
     }, [forModal]);
-    console.log(activeIndex, "activeIndex")
     return (
         <>
             <div className='w-[543px]'>

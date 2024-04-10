@@ -4,15 +4,19 @@ import { useUser } from '@/context/useContext';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import Modal from "react-modal";
+import { CreateAccountType } from '@/types/createaccounttype/createaccounttype';
+import { FormikProps } from 'formik';
 
 type HeroVideoProps = {
     forModal?: boolean;
     setForModal: (quantity: boolean) => void;
+    formik: FormikProps<CreateAccountType>
 };
 
-const Relationship = ({ setForModal, forModal }: HeroVideoProps) => {
+const Relationship = ({ setForModal, forModal, formik }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
+    const { values, setFieldValue } = formik;
     const { activeIndex, setActiveIndex, activeDiv, setActiveDiv } = useUser()
     const closeModal = () => {
         setIsClosing(true); // Set closing state to trigger animation
@@ -36,6 +40,13 @@ const Relationship = ({ setForModal, forModal }: HeroVideoProps) => {
             setActiveDiv(index); // Otherwise, set the clicked div as active
             setActiveIndex(index); // Set active index for other purposes if needed
         }
+    };
+
+    const handleRelationshipSelect = (relationshipTitle: string) => {
+        // Assuming you have a field in your formik values to store the selected relationship
+        console.log("vfbhfbhggbrhvbh")
+        console.log(relationshipTitle, "relationship")
+        setFieldValue('lookingfor', relationshipTitle);
     };
 
     useEffect(() => {
@@ -85,7 +96,7 @@ const Relationship = ({ setForModal, forModal }: HeroVideoProps) => {
                                 relationshipData.map((data, index) => {
                                     return (
                                         <>
-                                            <div onClick={() => handleDivClick(index)} className={`${activeDiv == index ? "border-2 border-[#FF0080] bg-white w-full" : "bg-[#f0f2f4] border-2 border-transparent"} flex cursor-pointer rounded-[8px] min-h-[130px] min-w-[106px] pt-4 items-center flex-col gap-2 p-2 `}>
+                                            <div onClick={() => { handleDivClick(index); handleRelationshipSelect(data.title) }} className={`${activeDiv == index ? "border-2 border-[#FF0080] bg-white w-full" : "bg-[#f0f2f4] border-2 border-transparent"} flex cursor-pointer rounded-[8px] min-h-[130px] min-w-[106px] pt-4 items-center flex-col gap-2 p-2 `}>
                                                 <div>
                                                     <Image
                                                         src={data.icon}
@@ -96,7 +107,7 @@ const Relationship = ({ setForModal, forModal }: HeroVideoProps) => {
                                                     />
                                                 </div>
                                                 <span className='font-Poppins font-normal text-[15px] leading-5 text-center text-[#808080]'>{data.title}</span>
-                                            </div>
+                                            </div >
                                         </>
                                     )
                                 })
@@ -104,8 +115,8 @@ const Relationship = ({ setForModal, forModal }: HeroVideoProps) => {
                         </div>
                         <button onClick={closeModal} className='bg-primary rounded-[32px] px-8 py-4 text-white font-semibold text-[14px] leading-5 '>Continue</button>
                     </div>
-                </Modal>
-            </div>
+                </Modal >
+            </div >
         </>
     )
 }

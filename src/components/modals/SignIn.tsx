@@ -17,7 +17,7 @@ type HeroVideoProps = {
 const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVideoProps) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false)
-    const { signin, email, setIsEmail, password, setPassword, loader } = useUser()
+    const { signin, email, setIsEmail, password, setPassword, loader, SignInWithGoogle } = useUser()
     const closeModal = () => {
         setIsOpen(false);
         setForModal(false);
@@ -129,7 +129,7 @@ const SignIn = ({ setForModal, forModal, setIsPhoneNumber, setIsSignUp }: HeroVi
                                                 />
                                                 <span className='font-inter font-medium text-[16px] leading-7'>Log in with Facebook</span>
                                             </div>
-                                            <div onClick={googleAuth} className='flex gap-8 py-[14px] pl-[24px] border-[1px] rounded-[6px] boder-[#D1D5DB] cursor-pointer'>
+                                            <div onClick={SignInWithGoogle} className='flex gap-8 py-[14px] pl-[24px] border-[1px] rounded-[6px] boder-[#D1D5DB] cursor-pointer'>
                                                 <Image
                                                     src="/svg/google.svg"
                                                     alt="logo"
