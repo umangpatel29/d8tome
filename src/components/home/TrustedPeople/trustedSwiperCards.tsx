@@ -42,10 +42,10 @@ const TrustedSwiperCards = ({ heroSwiperData }: SwiperCardData) => {
                             />
                         </div>
                         <div className="flex flex-col justify-between items-start gap-2">
-                            <h2 className="text-white font-semibold text-[12px] leading-[12px]">
+                            <h2 className="text-white font-semibold text-[16px] leading-[12px]">
                                 {heroSwiperData.name}
                             </h2>
-                            <h4 className="font-normal text-[10px] leading-[9px] text-white">
+                            <h4 className="font-normal text-[13px] leading-[9px] text-white">
                                 {heroSwiperData.subTitle}
                             </h4>
                         </div>

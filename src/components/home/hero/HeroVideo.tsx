@@ -51,22 +51,22 @@ const HeroVideo = ({ videoCardData }: OuterCardSwiperProps) => {
               <Image
                 src="/svg/play.svg"
                 alt="not found"
-                width={539}
-                height={326}
-                className="w-full h-full object-contain"
+                width={50}
+                height={30}
+                className="!w-[30px] object-contain"
               />
             </div>
             <h2 className="font-normal text-white text-[16px] leading-[24px]">
               Play video..
             </h2>
           </div>
-          <h1 className="font-bold text-[16px] leading-[20px] text-white mt-2">
+          <h1 className="font-bold text-[17px] leading-[20px] text-white mt-2">
             Harisha Libeya
           </h1>
-          <h3 className="font-medium text-[10px] leading-[15px] mt-1 text-white">
+          <h3 className="font-medium text-[12px] leading-[15px] mt-1 text-white">
             29 Year old
           </h3>
-          <p className="max-w-[411px] break-words font-normal text-[10px] leading-[15px] text-white mt-3">
+          <p className="max-w-[411px] break-words font-normal text-[12px] leading-[15px] text-white mt-3">
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
             nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
             volutpat.{" "}

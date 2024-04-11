@@ -29,10 +29,10 @@ const Chat = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <h2 className="font-medium text-[14px] leading-[16px] text-white">
+              <h2 className="font-medium text-[16px] leading-[16px] text-white">
                 Harisha Libeya
               </h2>
-              <h2 className="font-normal text-[10px] leading-[12px] text-[#D3D3D3]">
+              <h2 className="font-normal text-[13px] leading-[12px] text-[#D3D3D3]">
                 Published 3 days ago
               </h2>
             </div>
@@ -48,10 +48,10 @@ const Chat = () => {
           </div>
         </div>
         <div className="flex justify-end items-center w-full gap-2">
-          <p className="font-normal text-[9px] leading-[10px] text-white">
+          <p className="font-normal text-[12px] leading-[10px] text-white">
             10k Likes
           </p>
-          <p className="font-normal text-[9px] leading-[10px] text-white">
+          <p className="font-normal text-[12px] leading-[10px] text-white">
             3.5k Viewer
           </p>
         </div>
@@ -69,7 +69,7 @@ const Chat = () => {
         <input
           type="text"
           placeholder="Type your comments...."
-          className="rounded-md w-full bg-[#212121] border border-[#3f3f3f] py-3 px-[15px] font-normal text-[10px] leading-[12px] text-[#9a9a9a]"
+          className="rounded-md w-full bg-[#212121] border border-[#3f3f3f] py-3 px-[15px] font-normal text-[14px] leading-[12px] text-[#9a9a9a]"
         />
       </div>
     </div>

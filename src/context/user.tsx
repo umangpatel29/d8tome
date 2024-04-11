@@ -1,12 +1,12 @@
 "use client"
-import { loginType, signInType, signUpType, validOtpType } from '@/types/data';
-import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import { loginType, signUpType, validOtpType } from '@/types/data';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { UserContext } from './useContext';
 import { Auth } from '@/services/http/auth';
 import { Verifyemail } from '@/services/http/verifyEmail';
 import { VerifyPhone } from '@/services/http/verifyNumber';
+import { ToastContainer, toast } from 'react-toastify';
 
 export type UserProvide = {
     signup: (val: signUpType) => void;
@@ -38,6 +38,8 @@ export type UserProvide = {
     setActiveIndex: (val: number) => void
     activeDiv: number | null
     setActiveDiv: (val: number | null) => void
+    isAccountCreated: boolean | null
+    setIsAccountCreated: (val: boolean) => void
 };
 
 export type UserProviderProps = {
@@ -67,6 +69,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const [isLogin, setIsLogin] = useState(false)
     const [activeIndex, setActiveIndex] = useState(0)
     const [activeDiv, setActiveDiv] = useState<number | null>(null);
+    const [isAccountCreated, setIsAccountCreated] = useState(false);
 
     const getOtp = (access_token: any) => {
         console.log(access_token, "tokennnnnn")
@@ -110,9 +113,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             password
         }).then((res) => {
             setToken(res?.data?.accessToken)
-            localStorage.setItem("access_token", res?.data?.accessToken)
+            localStorage.setItem("accountCreated", "true")
             closeModal()
-            setIsLogin(true)
+            // setIsLogin(true)
             setLoader(false)
             router.push("/")
             setIsEmail("")
@@ -135,10 +138,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
             localStorage.setItem(USER_AUTH_TOKEN, res?.data?.accessToken)
             localStorage.setItem("email", email)
             setToken(res?.data?.accessToken)
-            // setCookie(USER_AUTH_TOKEN, res.access_token, {
-            //     maxAge: 60 * 60 * 24 * 36500, // 100 years
-            // });
-            // router.push("/mydocuments");
             setPassword("")
             setConfirmPassword("")
             setIsEmail("")
@@ -168,6 +167,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ signup, loader, setLoader, getOtp, isEmailVerification, setIsEmailVerification, token, password, setPassword, email, setIsEmail, confirmPassword, setConfirmPassword, phoneNumber, setPhoneNumber, isPhoneNumberCode, setIsPhoneNumberCode, getPhoneOtp, signin, setToken, isSpinner, setIsSpinner, isLogin, setIsLogin, SignInWithGoogle, activeIndex, setActiveIndex, activeDiv, setActiveDiv }}>{children}</UserContext.Provider>
+        <>
+            <UserContext.Provider value={{ signup, loader, setLoader, getOtp, isEmailVerification, setIsEmailVerification, token, password, setPassword, email, setIsEmail, confirmPassword, setConfirmPassword, phoneNumber, setPhoneNumber, isPhoneNumberCode, setIsPhoneNumberCode, getPhoneOtp, signin, setToken, isSpinner, setIsSpinner, isLogin, setIsLogin, SignInWithGoogle, activeIndex, setActiveIndex, activeDiv, setActiveDiv, isAccountCreated, setIsAccountCreated }}>{children}</UserContext.Provider>
+        </>
     )
 }

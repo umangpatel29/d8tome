@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import Modal from "react-modal";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css'
 import VerifyEmail from './VerifyEmail';
 import { VerifyPhone } from '@/services/http/verifyNumber';
 import { useUser } from '@/context/useContext';
@@ -86,6 +88,11 @@ const LoginWithPhoneNumber = ({ setForModal, forModal }: HeroVideoProps) => {
                                 <span className='font-Poppins text-[#111827] font-semibold text-[20px] leading-7 tracking-[-2%]'>Can we get your number?</span>
                             </div>
                             <div className='flex gap-3'>
+                                {/* <PhoneInput
+                                    country={'us'}
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber(e.target.value as)}
+                                /> */}
                                 <input type="text" placeholder='+91' className='w-[83px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[13px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[8px]' />
                                 <input type="text" placeholder='Enter your phone number' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} className='w-[291px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[13px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[8px]' />
                             </div>
@@ -93,7 +100,7 @@ const LoginWithPhoneNumber = ({ setForModal, forModal }: HeroVideoProps) => {
                                 We’ll text you a code to verify you’re really you Message and data rats may apply. <span className='text-[#1E22FB] underline'>What happens if your number changes?</span>
                             </p>
                             <button onClick={() => getPhoneOtp({ closeModal, token })} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>
-                                {loader ? <Spinner /> : "Next"}
+                                {loader ? <Spinner color="#FF0080" textColor="#e5e7eb" /> : "Next"}
                             </button>
                         </div>
                     </div>

@@ -125,7 +125,7 @@ const SignUp = ({ setForModal, forModal, setIsPhoneNumber, setIsSignIn }: HeroVi
                             <div className='flex flex-col gap-5'>
                                 <button onClick={handleSignUp} className='font-Poppins rounded-[6px] font-medium text-[14px] leading-7 text-center text-white bg-[#FF0080] px-[24px] py-[10px]'>
                                     {
-                                        loader ? <Spinner /> : "Agree and Sign up"
+                                        loader ? <Spinner color="#FF0080" textColor="#e5e7eb"/> : "Agree and Sign up"
                                     }
                                 </button>
                                 <span className='border-t-[1px] border-[#6B7280] relative'>

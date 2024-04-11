@@ -18,15 +18,15 @@ const Relationship = ({ setForModal, forModal, formik }: HeroVideoProps) => {
     const [isClosing, setIsClosing] = useState(false);
     const { values, setFieldValue } = formik;
     const { activeIndex, setActiveIndex, activeDiv, setActiveDiv } = useUser()
-    const closeModal = () => {
-        setIsClosing(true); // Set closing state to trigger animation
-        setTimeout(() => {
-            setIsOpen(false);
-            setForModal(false);
-            document.body.style.overflow = 'unset';
-            setIsClosing(false); // Reset closing state after animation
-        }, 500); // Adjust the timeout to match the animation duration
-    };
+        const closeModal = () => {
+            setIsClosing(true); // Set closing state to trigger animation
+            setTimeout(() => {
+                setIsOpen(false);
+                setForModal(false);
+                document.body.style.overflow = 'unset';
+                setIsClosing(false); // Reset closing state after animation
+            }, 500); // Adjust the timeout to match the animation duration
+        };
     const openModal = () => {
         setIsOpen(true);
         setForModal(true);
@@ -46,7 +46,7 @@ const Relationship = ({ setForModal, forModal, formik }: HeroVideoProps) => {
         // Assuming you have a field in your formik values to store the selected relationship
         console.log("vfbhfbhggbrhvbh")
         console.log(relationshipTitle, "relationship")
-        setFieldValue('lookingfor', relationshipTitle);
+        setFieldValue('looking_for', relationshipTitle);
     };
 
     useEffect(() => {

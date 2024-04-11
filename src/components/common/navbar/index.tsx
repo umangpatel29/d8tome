@@ -11,7 +11,11 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { width } = useWindowSize();
-  const { setToken, setIsSpinner, setIsLogin } = useUser()
+  const { setIsAccountCreated } = useUser()
+
+  // useEffect(() => {
+  //   setIsSpinner(false)
+  // }, [isSpinner])
 
   useEffect(() => {
     if (isOpen) {
@@ -29,10 +33,11 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("USER_AUTH_TOKEN")
-    localStorage.removeItem('access_token')
-    setIsSpinner(true)
+    localStorage.removeItem('accountCreated')
+    setIsAccountCreated(false)
+    // setIsSpinner(true)
     router.push("/")
-    setIsLogin(false)
+    // setIsLogin(false)
   }
 
   return (

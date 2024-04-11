@@ -182,7 +182,7 @@ const EmailVerificationCode = ({ setForModal, forModal, setIsPhoneNumber }: Hero
                             <div className='flex flex-col gap-[10px]'>
                                 <button onClick={() => { handleVerify() }} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>
                                     {
-                                        isValidOtp ? <Spinner /> : "Next"
+                                        isValidOtp ? <Spinner color="#FF0080" textColor="#e5e7eb"/> : "Next"
                                     }
                                 </button>
                                 <div className='w-full flex justify-end'><button onClick={() => getOtp(token as string)} className='font-Poppins text-[#FF0080] bg-white py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-[80px]'>Re-Send</button></div>

@@ -85,25 +85,25 @@ function OuterCardSwiper({ setVideoCardData, leftCardData }: CardDataProps) {
                   <div className="font-bold text-[30px] leading-[37.5px] text-black">
                     {character.name}
                   </div>
-                  <p className="font-normal text-[10px] leading-[15px] text-netural-black mt-1">
+                  <p className="font-normal text-[11px] leading-[15px] text-netural-black mt-1">
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                     sed diam nonummy nibh Lorem ipsum dolor sit amet,
                     consectetuer adipiscing elit, sed diam nonummy nibh
                   </p>
-                  <button className="bg-dark-pink text-white py-2 px-4 text-center rounded-[3px] mt-2 font-medium text-[10px] leading-[15px]">
+                  <button className="bg-dark-pink text-white py-2 px-4 text-center rounded-[3px] mt-2 font-medium text-[12px] leading-[15px]">
                     Request to Match
                   </button>
                   <div className="flex items-center w-full flex-wrap justify-start gap-1 mt-3">
-                    <div className="bg-light-pink py-[7px] px-[15px] rounded-[27px] text-center font-normal text-[9px] leading-[13.5px]">
+                    <div className="bg-light-pink py-[7px] px-[15px] rounded-[27px] text-center font-normal text-[10px] leading-[13.5px]">
                       #aries
                     </div>
-                    <div className="bg-light-pink py-[7px] px-[15px] rounded-[27px] text-center font-normal text-[9px] leading-[13.5px]">
+                    <div className="bg-light-pink py-[7px] px-[15px] rounded-[27px] text-center font-normal text-[10px] leading-[13.5px]">
                       #photography
                     </div>
-                    <div className="bg-light-pink py-[7px] px-[15px] rounded-[27px] text-center font-normal text-[9px] leading-[13.5px]">
+                    <div className="bg-light-pink py-[7px] px-[15px] rounded-[27px] text-center font-normal text-[10px] leading-[13.5px]">
                       #aries
                     </div>
-                    <div className="bg-light-pink py-[7px] px-[15px] rounded-[27px] text-center font-normal text-[9px] leading-[13.5px]">
+                    <div className="bg-light-pink py-[7px] px-[15px] rounded-[27px] text-center font-normal text-[10px] leading-[13.5px]">
                       #musiclover
                     </div>
                   </div>

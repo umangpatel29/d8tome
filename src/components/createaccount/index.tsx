@@ -48,7 +48,7 @@ const CreateAccountSteps = () => {
             gender: '',
             show_gender: false,
             show_me: '',
-            lookingfor: "",
+            looking_for: "",
             profileImage: [],
             passion: [],
             sexualorientation: [],
@@ -78,6 +78,7 @@ const CreateAccountSteps = () => {
             UserProfile.createUser(
                 create_user, token || ""
             ).then((res) => {
+                localStorage.setItem('accountCreated', 'true')
                 console.log(res, "res")
             }).catch((err) => {
                 console.log(err)

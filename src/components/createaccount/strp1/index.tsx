@@ -38,7 +38,7 @@ const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredFi
         <div className='grid gap-x-3 md:grid-cols-2'>
           <div className=''>
             <p className='font-semibold text-[18px] leading-[20px] text-[#3A3A3A]'>First Name*</p>
-            <div className={`mt-1 ${isRequiredField && formik.errors.firstname && formik.touched.firstname && 'border border-red-500 rounded-md '}`}>
+            <div className={`mt-2 ${isRequiredField && formik.errors.firstname && formik.touched.firstname && 'border border-red-500 rounded-md '}`}>
               <input type="text" id='firstname' name='firstname' placeholder='First name' className='py-3 rounded-md  border w-full px-3'
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -49,7 +49,7 @@ const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredFi
           </div>
           <div className=''>
             <p className='font-semibold text-[18px] leading-[20px] text-[#3A3A3A]'>Last Name*</p>
-            <div className={`mt-1 ${isRequiredField && formik.errors.lastname && formik.touched.lastname && 'border border-red-500 rounded-md '}`}>
+            <div className={`mt-2 ${isRequiredField && formik.errors.lastname && formik.touched.lastname && 'border border-red-500 rounded-md '}`}>
               <input type="text" name='lastname' placeholder='Last name' className='py-3 rounded-md  border w-full px-3'
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -61,7 +61,7 @@ const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredFi
         </div>
         <div className=''>
           <p className='font-semibold text-[18px] leading-[20px] text-[#3A3A3A]'>Email Address*</p>
-          <div className={`mt-1 ${isRequiredField && formik.errors.email && formik.touched.email && 'border border-red-500 rounded-md '}`}>
+          <div className={`mt-2 ${isRequiredField && formik.errors.email && formik.touched.email && 'border border-red-500 rounded-md '}`}>
             <div contentEditable="false" className='py-3 rounded-md  border w-full px-3 text-[#9CA3AF]'>
               {email}
             </div>
@@ -70,7 +70,7 @@ const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredFi
         </div>
         <div>
           <p className='font-semibold text-[18px] leading-[20px]'>Birthday</p>
-          <div className='mt-1'>
+          <div className='mt-2'>
             <BirthdatePicker formik={formik} />
           </div>
         </div>

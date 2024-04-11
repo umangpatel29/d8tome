@@ -4,7 +4,7 @@ export interface CreateAccountType {
     email: string;
     DOB: string;
     profileImage: string[];
-    lookingfor: string;
+    looking_for: string;
     show_me: string;
     show_gender: boolean;
     gender: string;
