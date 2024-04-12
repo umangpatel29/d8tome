@@ -43,9 +43,9 @@ const Hero = () => {
     setIsBeginning(swiper.isBeginning);
     setIsEnd(swiper.isEnd);
   };
-
+  console.log(videoCardData, "videoCardData")
   return (
-    <div className="bg-gradient-to-r from-red-500 to-blue-500 w-full lg:h-[682px] min-h-[682px]">
+    <div className="bg-gradient-to-r overflow-x-hidden from-red-500 to-blue-500 w-full lg:h-[682px] min-h-[682px]">
       <div className="container mx-auto px-3 md:px-0 grid lg:grid-cols-4 lg:grid-rows-1 grid-cols-1 grid-rows-3  gap-8 justify-center items-center h-full w-full">
         {/* left side  */}
 

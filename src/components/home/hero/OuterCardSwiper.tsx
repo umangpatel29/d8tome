@@ -14,24 +14,25 @@ function OuterCardSwiper({ setVideoCardData, leftCardData }: CardDataProps) {
   const [characters, setCharacters] = useState(leftCardData);
   // const [lastDirection, setLastDirection] = useState<string>("");
   const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const [lastDirection, setLastDirection] = useState()
 
   const swiped = (direction: string, nameToDelete: string) => {
-    console.log("🚀 ~ swiped ~ nameToDelete:", nameToDelete, direction)
-
-    // if (direction) {
-    //   setLastDirection(direction);
-    // }
-
-    // Remove the swiped card from the characters array
-    const newCharacters = characters.filter(
-      (character) => character.name !== nameToDelete
-    );
-    setCharacters(newCharacters);
-    // Update the active card index if the removed card was the last card
-    if (activeCardIndex === characters.length - 1) {
-      setActiveCardIndex(activeCardIndex - 1);
+    if (direction === 'right') {
+      setLastDirection(direction as any)
     }
-  };
+    characters.pop()
+  }
+
+  // const swiped = (direction: string, nameToDelete: string) => {
+  //   console.log("🚀 ~ swiped ~ nameToDelete:", nameToDelete, direction)
+
+  //   // if (direction) {
+  //   //   setLastDirection(direction);
+  //   // }
+
+  //   // Remove the swiped card from the characters array
+  //   
+  // };
   const outOfFrame = (name: string) => {
     console.log(name + " left the screen!");
   };
@@ -41,13 +42,14 @@ function OuterCardSwiper({ setVideoCardData, leftCardData }: CardDataProps) {
       setCharacters(leftCardData);
     } else {
       const lastindex = characters.length - 1;
+      console.log(lastindex)
       setVideoCardData(characters[lastindex])
     }
   }, [characters]);
 
   return (
     <>
-      <div className="w-full relative h-full col-span-1  flex items-center justify-center">
+      <div className=" relative h-full col-span-1 w-full flex items-center justify-center">
         {characters.map((character, index, array) => (
           <TinderCard
             className="swipe lg:w-full w-[326px] absolute"
@@ -58,12 +60,6 @@ function OuterCardSwiper({ setVideoCardData, leftCardData }: CardDataProps) {
             <div
               style={{
                 backgroundImage: "url(" + character.image + ") ",
-                // marginLeft:
-                //   array.length - 1 - index === activeCardIndex ? "-10%" : "0",
-                // top:
-                //   array.length - 1 - index === activeCardIndex ? "-30px" : "0",
-                // height:
-                //   array.length - 1 - index === activeCardIndex ? "350px" : "",
                 transform:
                   array.length - 1 - index === activeCardIndex
                     ? "translate(-25px, 0px)"
@@ -72,7 +68,7 @@ function OuterCardSwiper({ setVideoCardData, leftCardData }: CardDataProps) {
               className={`${array.length - 1 - index === activeCardIndex
                 ? "min-h-[520px]"
                 : "min-h-[465px]"
-                } relative bg-no-repeat w-full bg-cover bg-top rounded-[15px] cursor-pointer shadow-2xl`}
+                } relative bg-no-repeat w-full bg-cover bg-top rounded-[15px] cursor-pointer `}
             >
               <div
                 className="w-full p-4 absolute bottom-0 rounded-b-[15px]"

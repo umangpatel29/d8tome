@@ -229,3 +229,41 @@ input[type=number]::-webkit-outer-spin-button {
     opacity: 0.2;
   }
 }
+
+.react-international-phone-country-selector-button {
+  width: 83px;
+  height: 46px !important;
+  border-radius: 6px !important;
+  border: 1px solid #dcdfe4 !important;
+}
+
+.react-international-phone-input-container {
+  gap: 10px;
+}
+
+.react-international-phone-input {
+  height: 46px !important;
+  width: 289px;
+  border-radius: 6px !important;
+  font-weight: normal;
+  font-size: 14px !important;
+  color: #9CA3AF !important;
+  border: 1px solid #dcdfe4 !important;
+  line-height: 20px;
+  outline: #dcdfe4;
+}
+
+.react-international-phone-country-selector-dropdown {
+  margin-top: 5px !important;
+  border-radius: 12px !important;
+}
+
+/* Add this CSS to your Tinder card elements */
+.swipe {
+  transform: translateZ(0);
+  /* Apply hardware acceleration */
+  transition: transform 0.3s ease;
+  /* Apply transition for smoother animation */
+  touch-action: manipulation;
+  /* Optimize touch responsiveness */
+}
