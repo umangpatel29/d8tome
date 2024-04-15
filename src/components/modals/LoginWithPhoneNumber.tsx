@@ -87,14 +87,12 @@ const LoginWithPhoneNumber = ({ setForModal, forModal }: HeroVideoProps) => {
                             <div className='flex justify-between'>
                                 <span className='font-Poppins text-[#111827] font-semibold text-[20px] leading-7 tracking-[-2%]'>Can we get your number?</span>
                             </div>
-                            <div className='flex gap-3'>
-                                {/* <PhoneInput
+                            <div className='flex gap-3 '>
+                                <PhoneInput
                                     country={'us'}
                                     value={phoneNumber}
-                                    onChange={(e) => setPhoneNumber(e.target.value as)}
-                                /> */}
-                                <input type="text" placeholder='+91' className='w-[83px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[13px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[8px]' />
-                                <input type="text" placeholder='Enter your phone number' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} className='w-[291px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[13px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[8px]' />
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                />
                             </div>
                             <p className='font-Poppins font-normal text-[12px] leading-5 text-[#374151]'>
                                 We’ll text you a code to verify you’re really you Message and data rats may apply. <span className='text-[#1E22FB] underline'>What happens if your number changes?</span>
