@@ -25,7 +25,7 @@ export type UserProvide = {
     setPassword: (val: string) => void
     setConfirmPassword: (val: string) => void
     phoneNumber: string
-    setPhoneNumber: (val: string) => void
+    setPhoneNumber: (val: any) => void
     isPhoneNumberCode: boolean | null
     setIsPhoneNumberCode: (val: boolean) => void
     signin: (val: loginType) => void

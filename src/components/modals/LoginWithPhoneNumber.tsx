@@ -88,18 +88,18 @@ const LoginWithPhoneNumber = ({ setForModal, forModal }: HeroVideoProps) => {
                             <div className='flex justify-between'>
                                 <span className='font-Poppins text-[#111827] font-semibold text-[20px] leading-7 tracking-[-2%]'>Can we get your number?</span>
                             </div>
-                            <PhoneInput
-                                defaultCountry="in"
-                                value={phoneNumber}
-                                onChange={(phone : any) => setPhoneNumber(phone)}
-                            />
-                            {/* <input type="text" placeholder='+91' className='w-[83px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[13px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[8px]' />
-                                <input type="text" placeholder='Enter your phone number' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} className='w-[291px] border-[1px] border-[#dcdfe4] outline-[#dcdfe4] pl-[12px] py-[13px] text-[#9CA3AF] font-Poppins font-normal text-[14px] leading-5 rounded-[8px]' /> */}
+                            <div className='flex gap-3 '>
+                                <PhoneInput
+                                    defaultCountry={'in'} // Change 'country' to 'defaultCountry'
+                                    value={phoneNumber}
+                                    onChange={(e: any) => setPhoneNumber(e.target.value)}
+                                />
+                            </div>
                             <p className='font-Poppins font-normal text-[12px] leading-5 text-[#374151]'>
                                 We’ll text you a code to verify you’re really you Message and data rats may apply. <span className='text-[#1E22FB] underline'>What happens if your number changes?</span>
                             </p>
                             <button onClick={() => getPhoneOtp({ closeModal, token })} className='font-Poppins text-white bg-[#FF0080] py-[10px] rounded-[6px] font-medium text-[14px] leading-7 w-full text-center'>
-                                {loader ? <Spinner color="#FF0080" textColor="#e5e7eb"/> : "Next"}
+                                {loader ? <Spinner color="#FF0080" textColor="#e5e7eb" /> : "Next"}
                             </button>
                         </div>
                     </div>
