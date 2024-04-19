@@ -66,7 +66,7 @@ const Navbar = () => {
             </button>
             <div className="h-10 w-[93px] cursor-pointer">
               <Image
-                src="/images/logo.png"
+                src="/svg/logo.svg"
                 alt="Logo not found"
                 width={93}
                 height={40}
@@ -152,7 +152,6 @@ const Navbar = () => {
           </div>
           <div className="flex gap-5">
             {/* <Link href='/login' className="text-primary font-bold">go to login page</Link> */}
-            <Link href='/createaccount' className="text-primary font-bold">go to create account</Link>
             <button className="text-[#FF0080] font-medium" onClick={handleLogout}>Logout</button>
           </div>
           {/* <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Sign In</button> */}
@@ -179,7 +178,7 @@ const Navbar = () => {
             <div className="flex items-center justify-center gap-2">
               <div className="h-10 w-10">
                 <Image
-                  src="/images/profile-picture.png"
+                  src="/svg/profilepicture.svg"
                   alt="home logo not found"
                   height={40}
                   width={40}

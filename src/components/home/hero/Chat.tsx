@@ -12,7 +12,7 @@ const Chat = () => {
           <div className="flex items-start justify-start gap-2">
             <div className="h-10 w-10 relative">
               <Image
-                src="/images/profile-picture.png"
+                src="/svg/profilepicture.svg"
                 alt="not found"
                 width={40}
                 height={40}
@@ -59,7 +59,7 @@ const Chat = () => {
       <div className="flex justify-center bottom-0 items-center gap-1">
         <div className="h-[40px] w-[40px]  relative border border-[#8b8b8b] rounded-full">
           <Image
-            src="/images/profile-picture.png"
+            src="/svg/profilepicture.svg"
             alt="not found"
             width={36}
             height={36}

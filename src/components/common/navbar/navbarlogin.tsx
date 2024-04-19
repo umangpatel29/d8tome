@@ -58,12 +58,6 @@ const NavbarLogin = () => {
 
                     </div>
                     <div className="flex gap-3">
-                        <Link href='/'>
-                            <div className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-[#F13170]'>Go to Home Page</div>
-                        </Link>
-                        <Link href='/createaccount'>
-                            <div className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-[#F13170]'>Go to create account Page</div>
-                        </Link>
                         
                         <button onClick={() => setIsSignIn(!isSignIn)} className='hidden md:flex px-6 py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-primary border border-primary'>Sign Up</button>
                         <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Log In</button>

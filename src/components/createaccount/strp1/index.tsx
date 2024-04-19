@@ -18,7 +18,7 @@ const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredFi
   const { values, setFieldValue } = formik;
 
   // const { email } = useUser()
-  let email : any
+  let email: any
   if (typeof window !== 'undefined') {
     email = localStorage.getItem('email');
     // Set email value in Formik
@@ -61,10 +61,15 @@ const StepOne: React.FC<StepOneProps> = ({ formik, handleStepClick, isRequiredFi
         </div>
         <div className=''>
           <p className='font-semibold text-[18px] leading-[20px] text-[#3A3A3A]'>Email Address*</p>
-          <div className={`mt-2 ${isRequiredField && formik.errors.email && formik.touched.email && 'border border-red-500 rounded-md '}`}>
-            <div contentEditable="false" className='py-3 rounded-md  border w-full px-3 text-[#9CA3AF]'>
+          <div className={`mt-2 rounded-md`}>
+            <div contentEditable="true" className='py-3 rounded-md  border w-full px-3 text-[#9CA3AF]'>
               {email}
             </div>
+            {/* <input contentEditable=" type="email" name='email' placeholder='Email' className='py-3 rounded-md  border w-full px-3'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+            /> */}
           </div>
           {(isRequiredField && (formik.errors.email || !formik.values.email)) && <div className='text-red-500 text-sm'>{formik.errors.email || "Required"}</div>}
         </div>

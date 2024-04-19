@@ -87,7 +87,7 @@ const Welcome = ({ setForModal, forModal }: HeroVideoProps) => {
                                             <div key={index} className='flex flex-col gap-[25px] '>
                                                 <div className='flex justify-center'>
                                                     <Image
-                                                        src="/images/logo.png"
+                                                        src="/svg/logo.svg"
                                                         alt="logo"
                                                         width={104}
                                                         height={44}

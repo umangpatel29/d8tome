@@ -7,9 +7,10 @@ import Dropzone from "react-dropzone";
 
 interface StepOneProps {
     formik: FormikProps<CreateAccountType>
+    handlePhotosUploaded: () => void
 }
 
-const StepThree = ({ formik }: StepOneProps) => {
+const StepThree = ({ formik, handlePhotosUploaded }: StepOneProps) => {
 
     const { values, setFieldValue } = formik;
 
@@ -64,6 +65,10 @@ const StepThree = ({ formik }: StepOneProps) => {
 
     useEffect(() => {
         // Serialize Formik values including file data
+        const uploadedPhotosCount = fileStates.reduce((acc, current) => acc + current.length, 0);
+        if (uploadedPhotosCount >= 2) {
+            handlePhotosUploaded();
+        }
         const formValues = {
             ...values, // Assuming other form values are stored in 'values' object
             profilePhotos: fileStates.map((photos) => photos.map(({ file }) => file)) // Extracting file objects from fileStates

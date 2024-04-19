@@ -7,9 +7,10 @@ import { CreateAccountType } from '@/types/createaccounttype/createaccounttype';
 
 interface StepOneProps {
     formik: FormikProps<CreateAccountType>
+    handleStepClick: (val : number) => void
 }
 
-const StepFour = ({ formik }: StepOneProps) => {
+const StepFour = ({ formik, handleStepClick }: StepOneProps) => {
     console.log("🚀 ~ StepFour ~ formik:", formik)
 
     const [passionModel, setPassionModel] = useState(false);

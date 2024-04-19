@@ -71,7 +71,7 @@ const Email = ({ setForModal, forModal, setIsVerifyEmail }: HeroVideoProps) => {
                         <div className='flex flex-col gap-5'>
                             <div className='flex justify-center'>
                                 <Image
-                                    src="/images/logo.png"
+                                    src="/svg/logo.svg"
                                     alt="logo"
                                     width={104}
                                     height={44}
