@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import StepOne from './strp1';
+import StepOne from './step1';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Image from 'next/image.js';
@@ -18,7 +18,6 @@ import { useRouter } from 'next/navigation';
 const SignupSchema = Yup.object().shape({
     firstname: Yup.string().required('Required'),
     lastname: Yup.string().required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
 });
 
 interface CreateAccountStepsProps {
@@ -50,12 +49,27 @@ const CreateAccountSteps = () => {
             sexualorientation: [],
         },
         validationSchema: SignupSchema,
-        onSubmit: (values: any) => {
-            console.log(values);
+        onSubmit: (values: CreateAccountType) => {
+            // Create a new FormData instance
+            const formData = new FormData();
+
+            // Append each key-value pair from the values object to the FormData
+            Object.entries(values).forEach(([key, value]) => {
+                // Check if the value is a string or an array of strings
+                if (typeof value === 'string' || (Array.isArray(value) && value.every(item => typeof item === 'string'))) {
+                    formData.append(key, value as string);
+                } else if (value instanceof Blob) {
+                    formData.append(key, value);
+                } else {
+                    console.warn(`Value for key '${key}' is not a string or Blob. Skipping.`);
+                }
+            });
+            console.log('formdata', formData)
             // Assuming validation passed, mark the current step as completed
             const updatedCompletedSteps = [...completedSteps];
             updatedCompletedSteps[currentStep] = true;
             setCompletedSteps(updatedCompletedSteps);
+
             // Move to the next step if not on the last step
             if (currentStep < 3) {
                 setCurrentStep(currentStep + 1);
@@ -203,7 +217,7 @@ const CreateAccountSteps = () => {
                                         Submit
                                     </button> :
 
-                                    <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => { handleNextClick() }}>
+                                    <button className={`bg-primary px-8 py-4 text-white font-semibold text-[14px] leading-5 rounded-[4px]`} onClick={() => { handleNextClick(), setIsRequiredField(true) }}>
                                         Next Step
                                     </button>
                             }

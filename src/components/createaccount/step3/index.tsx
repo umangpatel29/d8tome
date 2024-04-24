@@ -71,7 +71,7 @@ const StepThree = ({ formik, handlePhotosUploaded }: StepOneProps) => {
         }
         const formValues = {
             ...values, // Assuming other form values are stored in 'values' object
-            profilePhotos: fileStates.map((photos) => photos.map(({ file }) => file)) // Extracting file objects from fileStates
+            profileImage: fileStates.map((photos) => photos.map(({ file }) => file)) // Extracting file objects from fileStates
         };
 
         // Now, you can send 'formValues' in your API request

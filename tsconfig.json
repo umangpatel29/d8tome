@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/createaccount/strp1"
+    "src/components/createaccount/step1"
   ],
   "exclude": [
     "node_modules"

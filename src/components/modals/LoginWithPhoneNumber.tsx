@@ -37,7 +37,6 @@ const LoginWithPhoneNumber = ({ setForModal, forModal }: HeroVideoProps) => {
             closeModal();
         }
     }, [forModal]);
-    console.log(phoneNumber)
     return (
         <>
             <div className=''>
@@ -92,7 +91,7 @@ const LoginWithPhoneNumber = ({ setForModal, forModal }: HeroVideoProps) => {
                                 <PhoneInput
                                     defaultCountry={'in'} // Change 'country' to 'defaultCountry'
                                     value={phoneNumber}
-                                    onChange={(e: any) => setPhoneNumber(e.target.value)}
+                                    onChange={(e: any) => setPhoneNumber(e?.target?.value)}
                                 />
                             </div>
                             <p className='font-Poppins font-normal text-[12px] leading-5 text-[#374151]'>
