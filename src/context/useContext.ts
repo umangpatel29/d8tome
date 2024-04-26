@@ -32,7 +32,9 @@ export const UserContext = createContext<UserProvide>({
     activeDiv: null,
     setActiveDiv: () => { },
     isAccountCreated: null,
-    setIsAccountCreated: () => { }
+    setIsAccountCreated: () => { },
+    setIsSignIn: () => { },
+    isSignIn: null
 })
 
 export const useUser = () => {

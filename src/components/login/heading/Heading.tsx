@@ -1,8 +1,10 @@
 import NavbarLogin from '@/components/common/navbar/navbarlogin'
+import { useUser } from "@/context/useContext";
 import Image from 'next/image'
 import React from 'react'
 
 const Heading = () => {
+    const { isSignIn, setIsSignIn } = useUser()
     return (
         <div>
 
@@ -24,7 +26,7 @@ const Heading = () => {
                         <span className='font-semibold text-white text-[48px] max-w-[650px]'>Dating Application Concept</span>
                         <span className='font-normal text-center text-[20px] text-white max-w-[470px]'>D8teme is a social dating app that let’s you find & interact with people nearby with similar interests using text, voice messages & fun emojis</span>
                     </div>
-                    <button className='rounded-[6px] w-fit bg-gradient-to-r from-[#E8012B] to-[#F6794F] text-white text-[16x] font-medium px-9 py-[14px]'>Create Account</button>
+                    <button onClick={() => setIsSignIn(!isSignIn)} className='rounded-[6px] w-fit bg-gradient-to-r from-[#E8012B] to-[#F6794F] text-white text-[16x] font-medium px-9 py-[14px]'>Create Account</button>
                 </div>
             </div>
         </div>

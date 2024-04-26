@@ -40,6 +40,8 @@ export type UserProvide = {
     setActiveDiv: (val: number | null) => void
     isAccountCreated: boolean | null
     setIsAccountCreated: (val: boolean) => void
+    isSignIn: boolean | null
+    setIsSignIn: (val: boolean) => void
 };
 
 export type UserProviderProps = {
@@ -56,6 +58,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const [email, setIsEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const [isSignIn, setIsSignIn] = useState(false);
     const [token, setToken] = useState(() => {
         if (typeof window !== 'undefined') {
             return localStorage.getItem("USER_AUTH_TOKEN") || "";
@@ -167,7 +170,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
     return (
         <>
-            <UserContext.Provider value={{ signup, loader, setLoader, getOtp, isEmailVerification, setIsEmailVerification, token, password, setPassword, email, setIsEmail, confirmPassword, setConfirmPassword, phoneNumber, setPhoneNumber, isPhoneNumberCode, setIsPhoneNumberCode, getPhoneOtp, signin, setToken, isSpinner, setIsSpinner, isLogin, setIsLogin, SignInWithGoogle, activeIndex, setActiveIndex, activeDiv, setActiveDiv, isAccountCreated, setIsAccountCreated }}>{children}</UserContext.Provider>
+            <UserContext.Provider value={{ signup, isSignIn, setIsSignIn, loader, setLoader, getOtp, isEmailVerification, setIsEmailVerification, token, password, setPassword, email, setIsEmail, confirmPassword, setConfirmPassword, phoneNumber, setPhoneNumber, isPhoneNumberCode, setIsPhoneNumberCode, getPhoneOtp, signin, setToken, isSpinner, setIsSpinner, isLogin, setIsLogin, SignInWithGoogle, activeIndex, setActiveIndex, activeDiv, setActiveDiv, isAccountCreated, setIsAccountCreated }}>{children}</UserContext.Provider>
         </>
     )
 }

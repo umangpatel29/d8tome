@@ -16,7 +16,7 @@ import { useUser } from "@/context/useContext";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 
 const NavbarLogin = () => {
-    const [isSignIn, setIsSignIn] = useState(false);
+
     const [isSignUp, setIsSignUp] = useState(false);
     const [isPhoneNumber, setIsPhoneNumber] = useState(false)
     const [isWelcome, setIsWelcome] = useState(false)
@@ -25,7 +25,7 @@ const NavbarLogin = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { width } = useWindowSize();
-    const { isPhoneNumberCode, setIsPhoneNumberCode } = useUser()
+    const { isPhoneNumberCode, setIsPhoneNumberCode, isSignIn, setIsSignIn } = useUser()
     const [selectedKeys, setSelectedKeys] = React.useState(new Set(["English"]));
 
     const selectedValue = useMemo(
@@ -53,55 +53,68 @@ const NavbarLogin = () => {
 
     return (
         <>
-            <div className=" bg-transparent py-5 z-[999]">
-                <div className="container mx-auto px-5 flex items-center justify-between w-full">
-                    <div className="flex items-center justify-start gap-3 md:gap-10">
-                        <div className="h-10 w-[93px] cursor-pointer">
-                            <Image
-                                src="/svg/loginlogo.svg"
-                                alt="Logo not found"
-                                width={101}
-                                height={43}
-                                className="w-full h-full object-contain"
-                            />
-                        </div>
-                    </div>
-                    <div className="flex gap-3">
-                        <div className=' flex gap-[10px]  border-[1px] border-white rounded-[8px]'>
-                            {/* <div className=' text-white flex justify-center top-[12px] left-[9px]'>
-                                <Image
-                                    src="/svg/language.svg"
-                                    alt="Logo not found"
-                                    width={16}
-                                    height={16}
-                                    className=""
-                                />
-                            </div> */}
-                            <Dropdown>
-                                <DropdownTrigger>
-                                    <Button
-                                        variant="bordered"
-                                        className="capitalize px-[30px] text-white"
-                                    >
-                                        {selectedValue}
-                                    </Button>
-                                </DropdownTrigger>
-                                <DropdownMenu
-                                    aria-label="Single selection example"
-                                    variant="flat"
-                                    disallowEmptySelection
-                                    selectionMode="single"
-                                    selectedKeys={selectedKeys}
-                                    onSelectionChange={handleSelectionChange as any}
-                                >
-                                    <DropdownItem key="English" className="text-white py-1">English</DropdownItem>
-                                    <DropdownItem key="Hindi" className="text-white">Hindi</DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
-                        </div>
-                        <button onClick={() => setIsSignIn(!isSignIn)} className='px-[40px] py-[10px] rounded-[6px] font-Poppins font-medium text-[18px] leading-[18px] text-black bg-[#fff]'>Log In</button>
-                    </div>
+            <div>
+                <div className='w-full overflow-hidden h-[768px] relative flex justify-center items-center'>
+                    <Image
+                        src='/images/heading.png'
+                        alt=''
+                        fill
+                        className='object-cover'
+                    />
+                    <div className='w-screen h-[768px] absolute bg-[#0000009F]'>
 
+                    </div>
+                    <div className='absolute w-full top-0 z-[9999]'>
+                        <div className=" bg-transparent py-5 z-[999]">
+                            <div className="container mx-auto px-5 flex items-center justify-between w-full">
+                                <div className="flex items-center justify-start gap-3 md:gap-10">
+                                    <div className="h-10 w-[93px] cursor-pointer">
+                                        <Image
+                                            src="/svg/loginlogo.svg"
+                                            alt="Logo not found"
+                                            width={101}
+                                            height={43}
+                                            className="w-full h-full object-contain"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex gap-3">
+                                    <div className=' flex gap-[10px]  border-[1px] border-white rounded-[8px]'>
+                                        <Dropdown>
+                                            <DropdownTrigger>
+                                                <Button
+                                                    variant="bordered"
+                                                    className="capitalize px-[30px] text-white"
+                                                >
+                                                    {selectedValue}
+                                                </Button>
+                                            </DropdownTrigger>
+                                            <DropdownMenu
+                                                aria-label="Single selection example"
+                                                variant="flat"
+                                                disallowEmptySelection
+                                                selectionMode="single"
+                                                selectedKeys={selectedKeys}
+                                                onSelectionChange={handleSelectionChange as any}
+                                            >
+                                                <DropdownItem key="English" className="text-white py-1">English</DropdownItem>
+                                                <DropdownItem key="Hindi" className="text-white">Hindi</DropdownItem>
+                                            </DropdownMenu>
+                                        </Dropdown>
+                                    </div>
+                                    <button onClick={() => setIsSignIn(!isSignIn)} className='px-[40px] py-[10px] rounded-[6px] font-Poppins font-medium text-[18px] leading-[18px] text-black bg-[#fff]'>Log In</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex flex-col gap-9 absolute items-center'>
+                        <div className='flex flex-col gap-2 items-center'>
+                            <span className='font-semibold text-white text-[48px] max-w-[650px]'>Dating Application Concept</span>
+                            <span className='font-normal text-center text-[20px] text-white max-w-[470px]'>D8teme is a social dating app that let’s you find & interact with people nearby with similar interests using text, voice messages & fun emojis</span>
+                        </div>
+                        <button onClick={() => setIsSignIn(true)} className='rounded-[6px] w-fit bg-gradient-to-r from-[#E8012B] to-[#F6794F] text-white text-[16x] font-medium px-9 py-[14px]'>Create Account</button>
+                    </div>
                 </div>
             </div>
 

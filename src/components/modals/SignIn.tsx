@@ -8,7 +8,7 @@ import Spinner from '../spinner/Spinner';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 type HeroVideoProps = {
-    forModal?: boolean;
+    forModal?: boolean | null;
     setForModal: (quantity: boolean) => void;
     setIsPhoneNumber: (quantity: boolean) => void;
     setIsSignUp: (quantity: boolean) => void;

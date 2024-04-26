@@ -10,7 +10,7 @@ const Login = () => {
     return (
         <div className='px-['>
             <div>
-                <Heading />
+                <NavbarLogin />
             </div>
             <div className='mt-20'>
                 <Devices />
