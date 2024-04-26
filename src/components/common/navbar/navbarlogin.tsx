@@ -9,10 +9,11 @@ import VerifyEmail from "@/components/modals/VerifyEmail";
 import Welcome from "@/components/modals/Welcome";
 import useWindowSize from "@/hooks/useWindowSize";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import SignUp from "@/components/modals/SignUp";
 import Link from "next/link";
 import { useUser } from "@/context/useContext";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 
 const NavbarLogin = () => {
     const [isSignIn, setIsSignIn] = useState(false);
@@ -25,6 +26,16 @@ const NavbarLogin = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { width } = useWindowSize();
     const { isPhoneNumberCode, setIsPhoneNumberCode } = useUser()
+    const [selectedKeys, setSelectedKeys] = React.useState(new Set(["English"]));
+
+    const selectedValue = useMemo(
+        () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+        [selectedKeys]
+    );
+
+    const handleSelectionChange = (keys: string[]) => {
+        setSelectedKeys(new Set(keys));
+    };
 
     useEffect(() => {
         if (isOpen) {
@@ -42,24 +53,53 @@ const NavbarLogin = () => {
 
     return (
         <>
-            <div className="sticky top-0 border-b-2 bg-white py-5 z-[999]">
-                <div className="container mx-auto px-5 md:px-0 flex items-center justify-between w-full">
+            <div className=" bg-transparent py-5 z-[999]">
+                <div className="container mx-auto px-5 flex items-center justify-between w-full">
                     <div className="flex items-center justify-start gap-3 md:gap-10">
-
                         <div className="h-10 w-[93px] cursor-pointer">
                             <Image
-                                src="/images/logo.png"
+                                src="/svg/loginlogo.svg"
                                 alt="Logo not found"
-                                width={93}
-                                height={40}
+                                width={101}
+                                height={43}
                                 className="w-full h-full object-contain"
                             />
                         </div>
-
                     </div>
                     <div className="flex gap-3">
-                        <button onClick={() => setIsSignIn(!isSignIn)} className='hidden md:flex px-6 py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-primary border border-primary'>Sign Up</button>
-                        <button onClick={() => setIsSignIn(!isSignIn)} className='px-[34px] py-[10px] rounded-lg font-Poppins font-medium text-[18px] leading-[18px] text-white bg-[#F13170]'>Log In</button>
+                        <div className=' flex gap-[10px]  border-[1px] border-white rounded-[8px]'>
+                            {/* <div className=' text-white flex justify-center top-[12px] left-[9px]'>
+                                <Image
+                                    src="/svg/language.svg"
+                                    alt="Logo not found"
+                                    width={16}
+                                    height={16}
+                                    className=""
+                                />
+                            </div> */}
+                            <Dropdown>
+                                <DropdownTrigger>
+                                    <Button
+                                        variant="bordered"
+                                        className="capitalize px-[30px] text-white"
+                                    >
+                                        {selectedValue}
+                                    </Button>
+                                </DropdownTrigger>
+                                <DropdownMenu
+                                    aria-label="Single selection example"
+                                    variant="flat"
+                                    disallowEmptySelection
+                                    selectionMode="single"
+                                    selectedKeys={selectedKeys}
+                                    onSelectionChange={handleSelectionChange as any}
+                                >
+                                    <DropdownItem key="English" className="text-white py-1">English</DropdownItem>
+                                    <DropdownItem key="Hindi" className="text-white">Hindi</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+                        <button onClick={() => setIsSignIn(!isSignIn)} className='px-[40px] py-[10px] rounded-[6px] font-Poppins font-medium text-[18px] leading-[18px] text-black bg-[#fff]'>Log In</button>
                     </div>
 
                 </div>
@@ -67,7 +107,7 @@ const NavbarLogin = () => {
 
             {isOpen && (
                 <div
-                    className={`absolute z-50 slide-right md:!hidden border-t-2 flex-col px-5 h-screen bg-white gap-5 pt-5 transition-all duration-300 w-full left-[-500px] transform ${isOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+                    className={`absolute z-50 slide-right md:!hidden border-t-2 flex-col px-5 h-screen gap-5 pt-5 transition-all duration-300 w-full left-[-500px] transform ${isOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
                         }`}
                     style={{
                         height: isOpen ? "calc(100dvh - 80px)" : 0,
