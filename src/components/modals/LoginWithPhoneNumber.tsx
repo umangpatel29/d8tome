@@ -37,6 +37,7 @@ const LoginWithPhoneNumber = ({ setForModal, forModal }: HeroVideoProps) => {
             closeModal();
         }
     }, [forModal]);
+    console.log(phoneNumber,"phone number")
     return (
         <>
             <div className=''>

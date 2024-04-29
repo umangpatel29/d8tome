@@ -91,12 +91,11 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         })
     }
 
-    console.log(phoneNumber, "phone number")
-
     const getPhoneOtp = ({ token, closeModal }: validOtpType) => {
         setLoader(true)
         let phonenumber = localStorage.getItem('phoneNumber')
         if (!phonenumber) localStorage.setItem('phoneNumber', phoneNumber)
+        console.log(phonenumber,"phone")
         VerifyPhone.phoneOtp({ phone: localStorage.getItem('phoneNumber') }, token || "").then(() => {
             console.log("heel")
             closeModal()
